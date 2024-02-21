@@ -11,24 +11,24 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class CommandTest {
 	
 	public void testCommand() {
-			
+		fail();		
 	}
 	
 
 	public void testGetCommand() {
-		
+		fail();	
 	}
 	
 	public void testGetOwnerId() {
-		
+		fail();	
 	}
 	
 	public void testGetResolution() {
-		
+		fail();	
 	}
 	
 	public void testGetNote() {
-		
+		fail();	
 	}
 	
 
