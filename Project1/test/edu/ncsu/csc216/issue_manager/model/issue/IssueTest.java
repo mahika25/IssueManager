@@ -1,9 +1,8 @@
 package edu.ncsu.csc216.issue_manager.model.issue;
 
-import java.util.ArrayList;
-
-import edu.ncsu.csc216.issue_manager.model.command.Command;
-
+/**
+ * Class to test the Issue class
+ */
 public class IssueTest {
 	
 	

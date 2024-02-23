@@ -8,6 +8,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/**
+ * Class to test the Command class
+ */
 public class CommandTest {
 	
 	public void testCommand() {

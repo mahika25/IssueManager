@@ -1,11 +1,8 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 
-import java.util.List;
-
-import edu.ncsu.csc216.issue_manager.model.command.Command;
-import edu.ncsu.csc216.issue_manager.model.issue.Issue;
-import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
-
+/**
+ * Class to test the IssueList class
+ */
 public class IssueListTest {
 	
 	public void testAddIssue() {

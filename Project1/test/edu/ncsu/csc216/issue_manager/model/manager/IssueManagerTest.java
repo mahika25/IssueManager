@@ -3,6 +3,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 
+/**
+ * Class to test the IssueManager class
+ */
 public class IssueManagerTest {
 	
 	@Test
