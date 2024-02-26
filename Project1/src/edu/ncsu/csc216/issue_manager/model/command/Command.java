@@ -12,12 +12,43 @@ public class Command {
 	/**
 	 * Enumeration that contains the possible commands a user could do 
 	 */
-	public enum CommandValue { ASSIGN, CONFIRM, RESOLVE, VERIFY, REOPEN };
+	public enum CommandValue { 
+		
+		/** Command Value of Assign*/
+		ASSIGN, 
+
+		/** Command Value of Confirm*/
+		CONFIRM, 
+		
+		/** Command Value of Resolve*/
+		RESOLVE, 
+		
+		/** Command Value of Verify*/
+		VERIFY, 
+		
+		/** Command Value of Reopen*/
+		REOPEN 
+		
+	};
 	
 	/**
 	 * Enumeration that contains the possible resolutions an issue could have
 	 */
-	public enum Resolution { FIXED, DUPLICATE, WONTFIX, WORKSFORME };
+	public enum Resolution { 
+		
+		/** Resolution of fixed */
+		FIXED, 
+		
+		/** Resolution of duplicate */
+		DUPLICATE, 
+		
+		/** Resolution of wont fix */
+		WONTFIX, 
+		
+		/** Resolution of works for me */
+		WORKSFORME 
+		
+	};
 	
 	/**String for the fixed resolution*/
 	public static final String R_FIXED = "Fixed";
@@ -37,14 +68,32 @@ public class Command {
 	/** Note associated with the command*/
 	private String note;
 	
+	/** Command value associated with command*/
+	private CommandValue c;
+	
+	/** Command value associated with command*/
+	private Resolution resolution;
+	
+	
 	/**
 	 * Constructs the command object
 	 * @param c value of the command
 	 * @param ownerId id of the owner who owns the issue
 	 * @param r resolution of the issue
 	 * @param note note associated with command
+	 * @throws IllegalArgumentException if invalid information is given
 	 */
 	public Command(CommandValue c, String ownerId, Resolution r, String note) {
+		if((c == null) || (c == CommandValue.ASSIGN && ("".equals(ownerId) || ownerId == null)) || (c == CommandValue.RESOLVE && r == null) 
+				|| ("".equals(note) || note == null)){
+			throw new IllegalArgumentException("Invalid Information.");
+		}
+		
+		this.c = c;
+		this.ownerId = ownerId;
+		this.resolution = r;
+		this.note = note;
+		
 		
 	}
 	
@@ -53,7 +102,7 @@ public class Command {
 	 * @return the command value
 	 */
 	public CommandValue getCommand() {
-		return null;
+		return c;
 	}
 	
 	/**
@@ -61,7 +110,7 @@ public class Command {
 	 * @return the owner id
 	 */
 	public String getOwnerId() {
-		return null;
+		return ownerId;
 	}
 	
 	/**
@@ -69,7 +118,7 @@ public class Command {
 	 * @return the resolution
 	 */
 	public Resolution getResolution() {
-		return null;
+		return resolution;
 	}
 	
 	
@@ -78,7 +127,7 @@ public class Command {
 	 * @return the note
 	 */
 	public String getNote() {
-		return null;
+		return note;
 	}
 
 

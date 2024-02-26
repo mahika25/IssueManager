@@ -6,6 +6,7 @@ package edu.ncsu.csc216.issue_manager.model.issue;
 import java.util.ArrayList;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
 
 /**
  * Represents and issue and all its information
@@ -166,6 +167,12 @@ public class Issue {
 	/** Id of the issue */
 	private int issueId;
 	
+	/** State of the issue */
+	private IssueState state;
+	
+	/** Type of the issue */
+	private IssueType issueType;
+	
 	/** Summary of the issue */
 	private String summary;
 	
@@ -174,6 +181,9 @@ public class Issue {
 	
 	/** Whether the issue is confirmed or not  */
 	private boolean confirmed;
+	
+	/** Resolution of the issue */
+	private Resolution resolution;
 	
 	/** List of notes about the issue */
 	private ArrayList<String> notes;
@@ -193,6 +203,7 @@ public class Issue {
 	/** String to represent closed state */
 	public static final String CLOSED_NAME = "Closed";
 	
+	
 	/**
 	 * Constructs an issue with some basic information
 	 * @param id id of the issue
@@ -200,7 +211,9 @@ public class Issue {
 	 * @param summary summary of the issue
 	 * @param note note for the issue
 	 */
-	public Issue(int id, IssueType issueType, String summary, String note){ }
+	public Issue(int id, IssueType issueType, String summary, String note){ 
+		
+	}
 	
 	/**
 	 * Constructs an issue with some all the information
@@ -217,38 +230,88 @@ public class Issue {
 	
 	/** sets the issue id 
 	 * @param id id to set for the issue
+	 * @throws Illegal Argument Exception if id is less than 1
 	 */
-	private void setIssueId(int id) { }
+	private void setIssueId(int id) { 
+		if(id < 1) {
+			throw new IllegalArgumentException("Issue cannot be created.");
+		}
+		
+		this.issueId = id;
+	}
 	
 	/** sets the issue state 
 	 * @param state state to set for the issue
+	 * @throws IllegalArgumentException if invalid string is given
 	 */
-	private void setState(String state) { }
+	private void setState(String state) { 
+		switch(state) {
+			case NEW_NAME:
+				this.state = new NewState();
+			case WORKING_NAME:
+				this.state = new WorkingState();
+			case CONFIRMED_NAME:
+				this.state = new ConfirmedState();
+			case VERIFYING_NAME:
+				this.state = new VerifyingState();
+			case CLOSED_NAME:
+				this.state = new ClosedState();
+			default:
+				throw new IllegalArgumentException("Issue cannot be created");
+		}
+	}
 	
 	/** sets the issue type 
 	 * @param type type to set for the issue
+	 * @throws IllegalArgumentException if invalid string is given
 	 */
-	private void setIssueType(String type) { }
+	private void setIssueType(String type) {
+		if(type.equals(I_ENHANCEMENT)) {
+			this.issueType = IssueType.ENHANCEMENT;
+		}
+		
+		else if(type.equals(I_BUG)) {
+			this.issueType = IssueType.BUG;
+		}
+		
+		else {
+			throw new IllegalArgumentException("Issue cannot be created.");
+		}
+	}
 	
 	/** sets the issue summary 
 	 * @param summary summary to set for the issue
+	 * @throws IllegalArgumentException if invalid string is given
 	 */
-	private void setSummary(String summary) { }
+	private void setSummary(String summary) {
+		if("".equals(summary) || summary == null) {
+			throw new IllegalArgumentException("Issue cannot be created.");
+		}
+		
+		this.summary = summary;
+	}
 	
 	/** sets the issue owner 
 	 * @param owner owner to set for the issue
 	 */
-	private void setOwner(String owner) { }
+	private void setOwner(String owner) {
+		this.owner = owner;
+	}
 	
 	/** sets if the issue is confirmed or not 
 	 * @param confirmed whether issue is confirmed or not
 	 */
-	private void setConfirmed(boolean confirmed) { }
+	private void setConfirmed(boolean confirmed) {
+		this.confirmed = confirmed;
+	}
 	
 	/** sets the issue resolution 
 	 * @param resolution resolution to set for the issue
 	 */
-	private void setResolution(String resolution) { }
+	private void setResolution(String resolution) {
+		
+		
+	}
 	
 	/** sets the notes list for the issue
 	 * @param notes notes to set for the issue
