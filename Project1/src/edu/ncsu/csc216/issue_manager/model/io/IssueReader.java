@@ -66,11 +66,11 @@ public class IssueReader {
 	private static Issue processIssue(String line) {
 		String[] lineBreaker = line.split(",");
 		
-		if(lineBreaker.length < 7 || lineBreaker.length > 8) {
+		if(lineBreaker.length != 7 || lineBreaker.length != 8) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
 		
-		int id = Integer.parseInt(lineBreaker[0].substring(1));
+		int id = Integer.parseInt(lineBreaker[0]);
 		String state = lineBreaker[1];
         String issueType = lineBreaker[2];
         String summary = lineBreaker[3];
