@@ -101,7 +101,7 @@ public class Issue {
 				
 				case RESOLVE:
 					Resolution r = command.getResolution();
-					if((issueType == IssueType.ENHANCEMENT && r.equals(Resolution.WORKSFORME))
+					if(issueType == IssueType.ENHANCEMENT && r.equals(Resolution.WORKSFORME)
 							|| r.equals(Resolution.FIXED)) {
 						throw new UnsupportedOperationException("Invalid information.");
 					}
