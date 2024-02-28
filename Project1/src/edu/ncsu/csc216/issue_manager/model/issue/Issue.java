@@ -57,14 +57,66 @@ public class Issue {
 		/** Updates the state based on the command
 		 * @param command to be executed on the issue
 		 */
-		public void updateState(Command command) {  }
+		public void updateState(Command command) {
+			String note = command.getNote();
+			if("".equals(note) || note == null) {
+				throw new IllegalArgumentException("Invalid information.");
+			}
+			switch(command.getCommand()) {
+				case ASSIGN:
+					if(issueType.equals(IssueType.ENHANCEMENT)) {
+						String ownerId = command.getOwnerId();
+						
+						if("".equals(ownerId) ||  ownerId == null) {
+							throw new IllegalArgumentException("Invalid information.");
+						}
+						
+						setOwner(ownerId);
+						state = workingState;
+						notes.add(note);
+						
+					}
+					
+					else {
+						throw new UnsupportedOperationException("Invalid information.");
+					}
+					
+					
+				case CONFIRM:
+					if(issueType == IssueType.BUG) {
+						if(confirmed) {
+							state = confirmedState;
+							notes.add(note);
+						}
+					}
+					
+					else {
+						throw new UnsupportedOperationException("Invalid information.");
+					}
+				
+				case RESOLVE:
+					Resolution r = command.getResolution();
+					if((issueType == IssueType.ENHANCEMENT && r.equals(Resolution.WORKSFORME))
+							|| r.equals(Resolution.FIXED)) {
+						throw new UnsupportedOperationException("Invalid information.");
+					}
+					resolution = r;
+					state = closedState;
+					notes.add(note);
+				
+				default:
+					throw new UnsupportedOperationException("Invalid information.");
+				
+					
+			}
+		}
 	
 		
 		/** gets the name of the state
 		 * @return the name of the state
 		 */
 		public String getStateName() {
-			return null;
+			return NEW_NAME;
 		}
 		
     }
@@ -80,13 +132,41 @@ public class Issue {
 		/** Updates the state based on the command
 		 * @param command to be executed on the issue
 		 */
-		public void updateState(Command command) { }
+		public void updateState(Command command) {
+			Resolution r = command.getResolution();
+			String note = command.getNote();
+			if("".equals(note) || note == null) {
+				throw new IllegalArgumentException("Invalid information.");
+			}
+			
+			switch(command.getCommand()) {
+				case RESOLVE:
+					if(r.equals(Resolution.FIXED)) {
+						resolution = r;
+						state = verifyingState;
+						notes.add(note);
+					}
+					
+					else {
+						if(issueType == IssueType.ENHANCEMENT && r.equals(Resolution.WORKSFORME)) {
+							throw new UnsupportedOperationException("Invalid information.");
+						}
+						
+						resolution = r;
+						state = closedState;
+						notes.add(note);
+					}
+					
+				default:
+					throw new UnsupportedOperationException("Invalid information.");
+			}
+		}
 		
 		/** gets the name of the state
 		 * @return the name of the state
 		 */
 		public String getStateName() {
-			return null;
+			return WORKING_NAME;
 		}
 		
     }
@@ -102,13 +182,55 @@ public class Issue {
 		/** Updates the state based on the command
 		 * @param command to be executed on the issue
 		 */
-		public void updateState(Command command) { }
+		public void updateState(Command command) {
+			String note = command.getNote();
+			if("".equals(note) || note == null) {
+				throw new IllegalArgumentException("Invalid information.");
+			}
+			
+			switch(command.getCommand()) {
+				case REOPEN:
+					if(issueType.equals(IssueType.ENHANCEMENT)) {
+						if(owner != null && !"".equals(owner)) {
+							state = workingState;
+							notes.add(note);
+						}
+						
+						else {
+							state = newState;
+							notes.add(note);
+						}
+					}
+					
+					else {
+						if(owner != null && !"".equals(owner)) {
+							if(confirmed) {
+								state = workingState;
+								notes.add(note);
+							}
+							else {
+								state = confirmedState;
+								notes.add(note);
+							}
+						}
+						
+						else {
+							state = newState;
+							notes.add(note);
+						}
+					}
+				
+					
+				default:
+					throw new UnsupportedOperationException("Invalid information.");
+			}
+		}
 		
 		/** gets the name of the state
 		 * @return the name of the state
 		 */
 		public String getStateName() {
-			return null;
+			return CLOSED_NAME;
 		}
 		
     }
@@ -124,13 +246,32 @@ public class Issue {
 		/** Updates the state based on the command
 		 * @param command to be executed on the issue
 		 */
-		public void updateState(Command command) { }
+		public void updateState(Command command) {
+			
+			String note = command.getNote();
+			if("".equals(note) || note == null) {
+				throw new IllegalArgumentException("Invalid information.");
+			}
+			
+			switch(command.getCommand()) {
+			
+				case VERIFY:
+					state = closedState;
+					notes.add(note);
+				
+				case REOPEN:
+					state = workingState;
+					notes.add(note);
+				default:
+					throw new UnsupportedOperationException("Invalid information.");
+			}
+		}
 		
 		/** gets the name of the state
 		 * @return the name of the state
 		 */
 		public String getStateName() {
-			return null;
+			return VERIFYING_NAME;
 		}
 		
 	}
@@ -147,13 +288,47 @@ public class Issue {
 		/** Updates the state based on the command
 		 * @param command to be executed on the issue
 		 */
-		public void updateState(Command command) { }
+		public void updateState(Command command) {
+			Resolution r = command.getResolution();
+			String note = command.getNote();
+			if("".equals(note) || note == null) {
+				throw new IllegalArgumentException("Invalid information.");
+			}
+			
+			switch(command.getCommand()) {
+		
+			case ASSIGN:
+					String ownerId = command.getOwnerId();
+					
+					if("".equals(ownerId) || ownerId == null) {
+						throw new IllegalArgumentException("Invalid information.");
+					}
+					
+					setOwner(ownerId);
+					state = workingState;
+					notes.add(note);
+					
+			case RESOLVE:
+				if(r.equals(Resolution.WONTFIX)) {
+					resolution = r;
+					state = closedState;
+					notes.add(note);
+				}
+			
+			default:
+				throw new UnsupportedOperationException("Invalid information.");
+				
+			}	
+
+			
+			
+		}
 		
 		/** gets the name of the state
 		 * @return the name of the state
 		 */
 		public String getStateName() {
-			return null;
+			return CONFIRMED_NAME;
 		}
 		
 	}
@@ -203,6 +378,22 @@ public class Issue {
 	/** String to represent closed state */
 	public static final String CLOSED_NAME = "Closed";
 	
+	/** Instance of the New State */
+	private final IssueState newState = new NewState();
+	
+	/** Instance of the Working State */
+    private final IssueState workingState = new WorkingState();
+    
+    /** Instance of the Confirmed State */
+    private final IssueState confirmedState = new ConfirmedState();
+    
+    /** Instance of the Verifying State */
+    private final IssueState verifyingState = new VerifyingState();
+    
+    /** Instance of the Closed State */
+    private final IssueState closedState = new ClosedState();
+
+	
 	
 	/**
 	 * Constructs an issue with some basic information
@@ -211,8 +402,24 @@ public class Issue {
 	 * @param summary summary of the issue
 	 * @param note note for the issue
 	 */
-	public Issue(int id, IssueType issueType, String summary, String note){ 
+	public Issue(int id, IssueType issueType, String summary, String note){
 		
+		if (issueType == null || summary == null || "".equals(summary) || note == null || "".equals(note)) {
+			throw new IllegalArgumentException("Issue cannot be created."); 
+		}
+		
+		setIssueId(id);
+		//this.issueId = Issue.counter;
+		//incrementCounter();
+		this.state = newState;
+		this.issueType = issueType;
+		this.summary = summary;
+		this.owner = null;
+		this.confirmed = false;
+		this.resolution = null;
+		this.notes = new ArrayList<String>();
+		addNote(note);
+			
 	}
 	
 	/**
@@ -226,7 +433,17 @@ public class Issue {
 	 * @param resolution resolution of the issue
 	 * @param notes list of notes associated with an issue
 	 */
-	public Issue(int id, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) { }
+	public Issue(int id, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
+		setIssueId(id);
+		setState(state);
+		setIssueType(issueType);
+		setSummary(summary);
+		setOwner(owner);
+		setConfirmed(confirmed);
+		setResolution(resolution);
+		setNotes(notes);
+		
+	}
 	
 	/** sets the issue id 
 	 * @param id id to set for the issue
@@ -247,15 +464,15 @@ public class Issue {
 	private void setState(String state) { 
 		switch(state) {
 			case NEW_NAME:
-				this.state = new NewState();
+				this.state = newState;
 			case WORKING_NAME:
-				this.state = new WorkingState();
+				this.state = workingState;
 			case CONFIRMED_NAME:
-				this.state = new ConfirmedState();
+				this.state = confirmedState;
 			case VERIFYING_NAME:
-				this.state = new VerifyingState();
+				this.state = verifyingState;
 			case CLOSED_NAME:
-				this.state = new ClosedState();
+				this.state = closedState;
 			default:
 				throw new IllegalArgumentException("Issue cannot be created");
 		}
@@ -310,26 +527,44 @@ public class Issue {
 	 */
 	private void setResolution(String resolution) {
 		
-		
+		switch(resolution) {
+			case Command.R_FIXED:
+				this.resolution = Resolution.FIXED;
+			case Command.R_DUPLICATE:
+				this.resolution = Resolution.DUPLICATE;
+			case Command.R_WONTFIX:
+				this.resolution = Resolution.WONTFIX;
+			case Command.R_WORKSFORME:
+				this.resolution = Resolution.WORKSFORME;
+			default:
+				this.resolution = null;
+		}
+
 	}
+		
+		
 	
 	/** sets the notes list for the issue
 	 * @param notes notes to set for the issue
 	 */
-	private void setNotes(ArrayList<String> notes) { }
+	private void setNotes(ArrayList<String> notes) {
+		this.notes = notes;
+	}
 	
 	/** gets the id of the issue
 	 * @return id of the issue
 	 */
 	public int getIssueId() {
-		return 0;
+		return issueId;
 	}
 	
 	/** gets the state name of the issue
 	 * @return state name of the issue
 	 */
 	public String getStateName() {
-		return null;
+		
+		return state.getStateName();
+		
 	}
 	
 	
@@ -337,28 +572,46 @@ public class Issue {
 	 * @return type of the issue
 	 */
 	public String getIssueType() {
-		return null;
+		if(issueType.equals(IssueType.ENHANCEMENT)) {
+			return I_ENHANCEMENT;
+		}
+		
+		else {
+			return I_BUG;
+		}
+		
 	}
 	
 	/** gets the resolution of the issue
 	 * @return resolution of the issue
 	 */
 	public String getResolution() {
-		return null;
+		switch(resolution) {
+			case FIXED:
+				return Command.R_FIXED;
+			case DUPLICATE:
+				return Command.R_DUPLICATE;
+			case WONTFIX:
+				return Command.R_WONTFIX;
+			case WORKSFORME:
+				return Command.R_WORKSFORME;
+			default:
+				return null;
+		}
 	}
 	
 	/** gets the owner of the issue
 	 * @return owner of the issue
 	 */
 	public String getOwner() {
-		return null;
+		return owner;
 	}
 	
 	/** gets the summary of the issue
 	 * @return summary of the issue
 	 */
 	public String getSummary() {
-		return null;
+		return summary;
 	}
 	
 	
@@ -366,34 +619,54 @@ public class Issue {
 	 * @return notes of the issue
 	 */
 	public ArrayList<String> getNotes() {
-		return null;
+		return notes;
 	}
 	
 	/** gets the notes in string form for the issue
 	 * @return notes in string form of the issue
 	 */
 	public String getNotesString() {
-		return null;
+		String notesString = "";
+		for(int i = 0; i < notes.size(); i++) {
+			notesString += "- " + notes.get(i) + "\n";	
+		}
+		
+		return notesString;
 	}
 	
 	/** gets the confirmed boolean
 	 * @return if the issue is confirmed or not
 	 */
 	public boolean isConfirmed() {
-		return false;
+		return confirmed;
 	}
 	
 	/** converts issue to a string
 	 * @return string form of issue object
 	 */
 	public String toString() {
-		return null;
+		String issueString = "";
+		issueString += "* " + issueId + "," + state + "," + issueType + ","
+				+ summary + "," + owner + "," + confirmed;
+		
+		if(resolution != null) {
+			issueString += "," + resolution;
+		}
+		
+		issueString += '\n';
+		issueString += getNotesString();
+		return issueString;
+		
+		
 	}
 	
 	/** adds note to note list for issue
 	 * @param note note to add
 	 */
 	private void addNote(String note) {
+		if (note != null && !("".equals(note))) {
+            notes.add("[" + getStateName() + "] " + note);
+        }
 		
 	}
 	
@@ -401,7 +674,7 @@ public class Issue {
 	 * @param command command to update to
 	 */
 	public void update(Command command) {
-		
+		state.updateState(command);
 	}
 	
 	
