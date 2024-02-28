@@ -81,7 +81,7 @@ public class IssueReader {
         
         String notesString;
         if(lineBreaker.length == 7) {
-        	resolution = null;
+        	resolution = "";
         	notesString = lineBreaker[6];
   	
         }
