@@ -45,7 +45,7 @@ public class IssueReader {
 					issues.add(issue);
 				} 
 				
-				catch (Exception e) {
+				catch (IllegalArgumentException e) {
 					throw new IllegalArgumentException("Unable to load file.");
 				}
 			}
@@ -66,7 +66,7 @@ public class IssueReader {
 	private static Issue processIssue(String line) {
 		String[] lineBreaker = line.split(",");
 		
-		if(lineBreaker.length != 7 || lineBreaker.length != 8) {
+		if(lineBreaker.length != 7 && lineBreaker.length != 8) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
 		
@@ -92,7 +92,7 @@ public class IssueReader {
         }
         
         String[] noteParts = notesString.split("\\r?\\n?[-]");
-    	for(int i = 0; i < noteParts.length; i++) {
+    	for(int i = 1; i < noteParts.length; i++) {
     		notes.add(noteParts[i]);
     	}
     	

@@ -662,11 +662,11 @@ public class Issue {
 	 */
 	public String toString() {
 		String issueString = "";
-		issueString += "*" + issueId + "," + state + "," + issueType + ","
-				+ summary + "," + owner + "," + confirmed;
+		issueString += "*" + issueId + "," + getStateName() + "," + getIssueType() + ","
+				+ summary + "," + owner + "," + confirmed + ",";
 		
 		if(resolution != null) {
-			issueString += "," + resolution;
+			issueString += getResolution();
 		}
 		
 		issueString += '\n';

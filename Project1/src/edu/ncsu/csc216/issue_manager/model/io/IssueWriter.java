@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.List;
-
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 
 /**
