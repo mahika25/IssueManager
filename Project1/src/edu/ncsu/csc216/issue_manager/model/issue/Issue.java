@@ -628,7 +628,7 @@ public class Issue {
 	public String getNotesString() {
 		String notesString = "";
 		for(int i = 0; i < notes.size(); i++) {
-			notesString += "- " + notes.get(i) + "\n";	
+			notesString += "-" + notes.get(i) + "\n";	
 		}
 		
 		return notesString;
@@ -646,7 +646,7 @@ public class Issue {
 	 */
 	public String toString() {
 		String issueString = "";
-		issueString += "* " + issueId + "," + state + "," + issueType + ","
+		issueString += "*" + issueId + "," + state + "," + issueType + ","
 				+ summary + "," + owner + "," + confirmed;
 		
 		if(resolution != null) {
