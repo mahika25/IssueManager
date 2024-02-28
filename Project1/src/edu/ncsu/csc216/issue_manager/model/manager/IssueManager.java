@@ -83,6 +83,7 @@ public class IssueManager {
      * @return an array representation for the issues of a certain type
      */
 	public Object[][] getIssueListAsArrayByIssueType(String type) {
+		return null;
 		
 	}
 	
@@ -92,7 +93,7 @@ public class IssueManager {
      * @return The issue with the specified id
      */
 	public Issue getIssueById(int id) {
-		
+		return null;
 	}
 	
 	/**
@@ -109,7 +110,7 @@ public class IssueManager {
 	 * @param id id of issue to delete
 	 */
 	public void deleteIssueById(int id) {
-		IssueList.deleteIssueById(id);
+		//IssueList.deleteIssueById(id);
 	}
 	
 	/** 
