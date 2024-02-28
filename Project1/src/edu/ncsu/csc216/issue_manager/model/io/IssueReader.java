@@ -17,7 +17,9 @@ import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 public class IssueReader {
 	
 	/** Constructs an IssueReader object */
-	public IssueReader() { };
+	public IssueReader() {
+		// empty constructor
+	}
 	
 	/** 
 	 * Reads issue from a file

@@ -63,8 +63,8 @@ public class IssueManager {
      * @return an array representation of the issue list
      */
 	public Object[][] getIssueListAsArray() {
-		String[][] issueArray = new String[issueList.getIssues().size()][4];
 		List<Issue> givenList = issueList.getIssues();
+		String[][] issueArray = new String[givenList.size()][4];
 		
 		for(int i = 0; i < givenList.size(); i++) {
 			Issue curIssue = givenList.get(i);
@@ -83,8 +83,18 @@ public class IssueManager {
      * @return an array representation for the issues of a certain type
      */
 	public Object[][] getIssueListAsArrayByIssueType(String type) {
-		return null;
+		List<Issue> givenList = issueList.getIssuesByType(type);
+		String[][] issueArray = new String[givenList.size()][4];
 		
+		for(int i = 0; i < givenList.size(); i++) {
+			Issue curIssue = givenList.get(i);
+			issueArray[i][0] = Integer.toString(curIssue.getIssueId());
+			issueArray[i][1] = curIssue.getStateName();
+			issueArray[i][2] = curIssue.getIssueType();
+			issueArray[i][3] = curIssue.getSummary();	
+		}
+		
+		return issueArray;
 	}
 	
 	/**
@@ -102,6 +112,12 @@ public class IssueManager {
 	 * @param command command to execute
 	 */
 	public void executeCommand(int id, Command command) {
+		List<Issue> givenList = issueList.getIssues();
+		for(int i  = 0; i < givenList.size(); i++) {
+			if(givenList.get(i).getIssueId() == id) {
+				givenList.get(i).update(command);
+			}
+		}
 		
 	}
 	
@@ -122,6 +138,7 @@ public class IssueManager {
 	 */
 	public void addIssueToList(IssueType issueType, String summary, String note) {
 		
+		issueList.addIssue(issueType, summary, note);
 	}
 	
 	
