@@ -37,10 +37,17 @@ public class IssueWriterTest {
 		try {
 			IssueWriter.writeIssuesToFile("test-files/writeRecords.txt", issues);
 		} catch (IllegalArgumentException e) {
-			fail("Cannot write to course records file");
+			fail("Cannot write to issues to file");
 		}
 		
 		checkFiles("test-files/issue10.txt", "test-files/writeRecords.txt");
+	}
+	
+	/** Tests writeIssuesToFile method */
+	@Test
+	public void testWriteIssuesToFileInvalid() {
+		
+		
 	}
 		
 
