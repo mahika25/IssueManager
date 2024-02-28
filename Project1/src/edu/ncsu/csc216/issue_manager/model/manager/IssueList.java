@@ -3,6 +3,7 @@
  */
 package edu.ncsu.csc216.issue_manager.model.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
@@ -18,8 +19,14 @@ public class IssueList {
 	/** Counter to generate issue Id */
 	private int counter;
 	
+	/** List to store issues */
+    private List<Issue> issues;
+	
 	/** Constructs the IssueList object */
-	public IssueList() { }
+	public IssueList() {
+		this.counter = 1;
+		this.issues = new ArrayList<>();
+	}
 	
 	/** 
 	 * Add issue to issue list
@@ -29,27 +36,62 @@ public class IssueList {
 	 * @return the issue id
 	 */
 	public int addIssue (IssueType issueType, String summary, String note) {
-		return 0;
+		if(!issues.isEmpty()) {
+			Issue lastIssue = issues.get(issues.size() - 1);
+			int maxId = lastIssue.getIssueId();
+			counter = maxId++;
+		}
+		
+		else {
+			counter = 1;
+		}
+		
+		Issue issue = new Issue(counter, issueType, summary, note);
+		addIssue(issue);
+		return issue.getIssueId();
 	}
 	
 	/**
 	 * Add multiple issues to a list
 	 * @param issues issues to be added
 	 */
-	public void addIssues(List<Issue> issues) { }
+	public void addIssues(List<Issue> issues) {
+		
+		for(int i = 0; i < issues.size(); i++) {
+			addIssue(issues.get(i));
+		}
+	}
 	
 	/**
 	 * Add existing issue 
 	 * @param issue issue to be added
 	 */
-	private void addIssue(Issue issue) { }
+	private void addIssue(Issue issue) {
+		
+		for(int j = 0; j < issues.size(); j++) {
+			if(issues.get(j).getIssueId() == issue.getIssueId()) {
+				return;
+			}		
+		}
+		
+		int index = 0;
+		for(int i = 0; i < issues.size(); i++) {
+			if(issues.get(i).getIssueId() > issue.getIssueId()) {
+				break;
+			}
+			
+			index++;
+		}
+		
+		issues.add(index, issue);
+	}
 	
 	/**
 	 * Get list of issues
 	 * @return list of all issues
 	 */
 	public List<Issue> getIssues(){
-		return null;
+		return issues;
 	}
 	
 	/**
@@ -58,7 +100,14 @@ public class IssueList {
 	 * @return list of all issues
 	 */
 	public List<Issue> getIssuesByType(String type){
-		return null;
+		ArrayList<Issue> typeList = new ArrayList<>();
+		for(int i = 0; i < issues.size(); i++) {
+			if(issues.get(i).getIssueType().equals(type)) {
+				typeList.add(issues.get(i));
+			}
+		}
+		
+		return typeList;
 	}
 	
 	/**
@@ -67,6 +116,12 @@ public class IssueList {
 	 * @return issue of the specified id
 	 */
 	public Issue getIssueById(int id){
+		
+		for(int i = 0; i < issues.size(); i++) {
+			if(issues.get(i).getIssueId() == id) {
+				return issues.get(i);
+			}
+		}
 		return null;
 	}
 	
@@ -76,6 +131,11 @@ public class IssueList {
 	 * @param command command to execute
 	 */
 	public void executeCommand(int id, Command command) {
+		for(int i = 0; i < issues.size(); i++) {
+			if(issues.get(i).getIssueId() == id) {
+				issues.get(i).update(command);
+			}
+		}
 		
 	}
 	
@@ -85,10 +145,15 @@ public class IssueList {
 	 */
 	public void deleteIssueById(int id) {
 		
+		for(int i = 0; i < issues.size(); i++) {
+			if(issues.get(i).getIssueId() == id) {
+				issues.remove(i);
+			}
+		}
+		
 	}
 	
-	
-	
+
 	
 	
 }

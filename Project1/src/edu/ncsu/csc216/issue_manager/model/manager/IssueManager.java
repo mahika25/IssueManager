@@ -1,6 +1,11 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.io.IssueReader;
+import edu.ncsu.csc216.issue_manager.model.io.IssueWriter;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 
@@ -10,15 +15,23 @@ import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
  */
 public class IssueManager {
 	
+	/** Singleton instance */
+    private static final IssueManager SINGLETON = new IssueManager();
+
+    /** Reference to the current issue list */
+    private IssueList issueList;
+    
 	/** Constructs the issue manager object */
-	private IssueManager(){ }
+	private IssueManager(){
+		issueList = new IssueList();
+	}
 	
 	/**
      * Gets the  instance of the IssueManager.
      * @return IssueManager instance.
      */
 	public static IssueManager getInstance() {
-		return null;
+		return SINGLETON;
 	}
 	
 	/**
@@ -27,7 +40,7 @@ public class IssueManager {
      */
 
 	public void saveIssuesToFile(String filename) {
-		
+		IssueWriter.writeIssuesToFile(filename, issueList.getIssues());
 	}
 	
 	/**
@@ -35,14 +48,14 @@ public class IssueManager {
      * @param filename The name of the file to load from
      */
 	public void loadIssuesFromFile(String filename) {
-			
+			IssueReader.readIssuesFromFile(filename);
 	}
 	
 	/**
      * creates a new empty issue list
      */
 	public void createNewIssueList() {
-		
+		issueList = new IssueList();
 	}
 	
 	/**
@@ -50,7 +63,18 @@ public class IssueManager {
      * @return an array representation of the issue list
      */
 	public Object[][] getIssueListAsArray() {
-		return null;
+		String[][] issueArray = new String[issueList.getIssues().size()][4];
+		List<Issue> givenList = issueList.getIssues();
+		
+		for(int i = 0; i < givenList.size(); i++) {
+			Issue curIssue = givenList.get(i);
+			issueArray[i][0] = Integer.toString(curIssue.getIssueId());
+			issueArray[i][1] = curIssue.getStateName();
+			issueArray[i][2] = curIssue.getIssueType();
+			issueArray[i][3] = curIssue.getSummary();	
+		}
+		
+		return issueArray;
 	}
 	
 	/**
@@ -59,7 +83,7 @@ public class IssueManager {
      * @return an array representation for the issues of a certain type
      */
 	public Object[][] getIssueListAsArrayByIssueType(String type) {
-		return null;
+		
 	}
 	
 	/**
@@ -68,7 +92,7 @@ public class IssueManager {
      * @return The issue with the specified id
      */
 	public Issue getIssueById(int id) {
-		return null;
+		
 	}
 	
 	/**
@@ -85,7 +109,7 @@ public class IssueManager {
 	 * @param id id of issue to delete
 	 */
 	public void deleteIssueById(int id) {
-		
+		IssueList.deleteIssueById(id);
 	}
 	
 	/** 
