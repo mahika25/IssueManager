@@ -73,13 +73,10 @@ public class Issue {
 						
 						setOwner(ownerId);
 						state = workingState;
-						notes.add(note);
+						addNote(note);
 						
 					}
 					
-					else {
-						throw new UnsupportedOperationException("Invalid information.");
-					}
 					
 					break;
 					
@@ -88,13 +85,11 @@ public class Issue {
 					if(issueType == IssueType.BUG) {
 						if(confirmed) {
 							state = confirmedState;
-							notes.add(note);
+							addNote(note);
 						}
+
 					}
 					
-					else {
-						throw new UnsupportedOperationException("Invalid information.");
-					}
 					
 					break;
 					
@@ -107,7 +102,7 @@ public class Issue {
 					}
 					resolution = r;
 					state = closedState;
-					notes.add(note);
+					addNote(note);
 					break;	
 				
 				default:
@@ -150,7 +145,7 @@ public class Issue {
 					if(r.equals(Resolution.FIXED)) {
 						resolution = r;
 						state = verifyingState;
-						notes.add(note);
+						addNote(note);
 					}
 					
 					else {
@@ -160,7 +155,7 @@ public class Issue {
 						
 						resolution = r;
 						state = closedState;
-						notes.add(note);
+						addNote(note);
 					}
 					break;
 					
@@ -200,12 +195,12 @@ public class Issue {
 					if(issueType.equals(IssueType.ENHANCEMENT)) {
 						if(owner != null && !"".equals(owner)) {
 							state = workingState;
-							notes.add(note);
+							addNote(note);
 						}
 						
 						else {
 							state = newState;
-							notes.add(note);
+							addNote(note);
 						}
 					}
 					
@@ -213,17 +208,17 @@ public class Issue {
 						if(owner != null && !"".equals(owner)) {
 							if(confirmed) {
 								state = workingState;
-								notes.add(note);
+								addNote(note);
 							}
 							else {
 								state = confirmedState;
-								notes.add(note);
+								addNote(note);
 							}
 						}
 						
 						else {
 							state = newState;
-							notes.add(note);
+							addNote(note);
 						}
 					}
 					break;
@@ -264,12 +259,12 @@ public class Issue {
 			
 				case VERIFY:
 					state = closedState;
-					notes.add(note);
+					addNote(note);
 					break;
 					
 				case REOPEN:
 					state = workingState;
-					notes.add(note);
+					addNote(note);
 					break;
 					
 				default:
@@ -316,14 +311,14 @@ public class Issue {
 					
 					setOwner(ownerId);
 					state = workingState;
-					notes.add(note);
+					addNote(note);
 					break;
 					
 			case RESOLVE:
 				if(r.equals(Resolution.WONTFIX)) {
 					resolution = r;
 					state = closedState;
-					notes.add(note);
+					addNote(note);
 				}
 				break;
 				
