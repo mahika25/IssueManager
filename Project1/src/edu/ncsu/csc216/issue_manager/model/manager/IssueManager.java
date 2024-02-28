@@ -93,7 +93,7 @@ public class IssueManager {
      * @return The issue with the specified id
      */
 	public Issue getIssueById(int id) {
-		return null;
+		return issueList.getIssueById(id);
 	}
 	
 	/**
@@ -110,7 +110,8 @@ public class IssueManager {
 	 * @param id id of issue to delete
 	 */
 	public void deleteIssueById(int id) {
-		//IssueList.deleteIssueById(id);
+		
+		issueList.deleteIssueById(id);
 	}
 	
 	/** 

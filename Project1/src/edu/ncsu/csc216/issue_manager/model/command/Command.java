@@ -85,7 +85,7 @@ public class Command {
 	 */
 	public Command(CommandValue c, String ownerId, Resolution r, String note) {
 		if(c == null || c == CommandValue.ASSIGN && ("".equals(ownerId) || ownerId == null) || c == CommandValue.RESOLVE && r == null 
-				|| ("".equals(note) || note == null)){
+				|| "".equals(note) || note == null) {
 			throw new IllegalArgumentException("Invalid Information.");
 		}
 		

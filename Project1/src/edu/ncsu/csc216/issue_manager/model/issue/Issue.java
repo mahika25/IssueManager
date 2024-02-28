@@ -81,6 +81,8 @@ public class Issue {
 						throw new UnsupportedOperationException("Invalid information.");
 					}
 					
+					break;
+					
 					
 				case CONFIRM:
 					if(issueType == IssueType.BUG) {
@@ -93,6 +95,9 @@ public class Issue {
 					else {
 						throw new UnsupportedOperationException("Invalid information.");
 					}
+					
+					break;
+					
 				
 				case RESOLVE:
 					Resolution r = command.getResolution();
@@ -103,11 +108,12 @@ public class Issue {
 					resolution = r;
 					state = closedState;
 					notes.add(note);
+					break;	
 				
 				default:
 					throw new UnsupportedOperationException("Invalid information.");
 				
-					
+				
 			}
 		}
 	
@@ -156,6 +162,7 @@ public class Issue {
 						state = closedState;
 						notes.add(note);
 					}
+					break;
 					
 				default:
 					throw new UnsupportedOperationException("Invalid information.");
@@ -219,7 +226,7 @@ public class Issue {
 							notes.add(note);
 						}
 					}
-				
+					break;
 					
 				default:
 					throw new UnsupportedOperationException("Invalid information.");
@@ -258,10 +265,13 @@ public class Issue {
 				case VERIFY:
 					state = closedState;
 					notes.add(note);
-				
+					break;
+					
 				case REOPEN:
 					state = workingState;
 					notes.add(note);
+					break;
+					
 				default:
 					throw new UnsupportedOperationException("Invalid information.");
 			}
@@ -307,6 +317,7 @@ public class Issue {
 					setOwner(ownerId);
 					state = workingState;
 					notes.add(note);
+					break;
 					
 			case RESOLVE:
 				if(r.equals(Resolution.WONTFIX)) {
@@ -314,7 +325,8 @@ public class Issue {
 					state = closedState;
 					notes.add(note);
 				}
-			
+				break;
+				
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
 				
@@ -465,14 +477,19 @@ public class Issue {
 		switch(state) {
 			case NEW_NAME:
 				this.state = newState;
+				break;
 			case WORKING_NAME:
 				this.state = workingState;
+				break;
 			case CONFIRMED_NAME:
 				this.state = confirmedState;
+				break;
 			case VERIFYING_NAME:
 				this.state = verifyingState;
+				break;
 			case CLOSED_NAME:
 				this.state = closedState;
+				break;
 			default:
 				throw new IllegalArgumentException("Issue cannot be created");
 		}
@@ -530,12 +547,16 @@ public class Issue {
 		switch(resolution) {
 			case Command.R_FIXED:
 				this.resolution = Resolution.FIXED;
+				break;
 			case Command.R_DUPLICATE:
 				this.resolution = Resolution.DUPLICATE;
+				break;
 			case Command.R_WONTFIX:
 				this.resolution = Resolution.WONTFIX;
+				break;
 			case Command.R_WORKSFORME:
 				this.resolution = Resolution.WORKSFORME;
+				break;
 			default:
 				this.resolution = null;
 		}
@@ -589,11 +610,11 @@ public class Issue {
 		switch(resolution) {
 			case FIXED:
 				return Command.R_FIXED;
-			case DUPLICATE:
+		case DUPLICATE:
 				return Command.R_DUPLICATE;
-			case WONTFIX:
+		case WONTFIX:
 				return Command.R_WONTFIX;
-			case WORKSFORME:
+		case WORKSFORME:
 				return Command.R_WORKSFORME;
 			default:
 				return null;
