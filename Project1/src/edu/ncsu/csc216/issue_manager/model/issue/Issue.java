@@ -219,12 +219,13 @@ public class Issue {
 							}
 							else {
 								state = confirmedState;
+								setConfirmed(true);
 								addNote(note);
 							}
 						}
 						
 						else {
-							state = confirmedState;
+							state = newState;
 							addNote(note);
 						}
 					}
