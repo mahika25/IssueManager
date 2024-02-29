@@ -77,6 +77,10 @@ public class Issue {
 						
 					}
 					
+					else {
+						throw new UnsupportedOperationException("Invalid information.");
+					}
+					
 					
 					break;
 					
@@ -87,6 +91,10 @@ public class Issue {
 						setConfirmed(true);
 						addNote(note);
 
+					}
+					
+					else {
+						throw new UnsupportedOperationException("Invalid information.");
 					}
 					
 					
