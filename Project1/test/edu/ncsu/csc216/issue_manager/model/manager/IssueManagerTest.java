@@ -3,6 +3,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.issue_manager.model.issue.Issue;
+import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
+
 /**
  * Class to test the IssueManager class
  */
@@ -47,7 +50,9 @@ public class IssueManagerTest {
 	/**Tests getIssueById method */
 	@Test
 	public void testGetIssueById() {
-		fail();
+		IssueList list = new IssueList();
+        int id = list.addIssue(IssueType.BUG, "summary", "note");
+        assertEquals("summary", list.getIssueById(id).getSummary());
 	}
 	
 	/**Tests executeCommand method */
@@ -59,13 +64,24 @@ public class IssueManagerTest {
 	/**Tests deleteissueById method */
 	@Test
 	public void testDeleteIssueById() {
-		fail();
+		IssueList list = new IssueList();
+        int id = list.addIssue(IssueType.BUG, "summary", "note");
+        assertEquals(1, list.getIssues().size());
+        list.deleteIssueById(id);
+        assertEquals(0, list.getIssues().size());
 	}
 	
 	/**Tests addIssueToList method */
 	@Test
 	public void testAddIssueToList() {
-		fail();
+		IssueList issueList = new IssueList();
+		int id = issueList.addIssue(IssueType.BUG, "summary", "note");
+		assertEquals(1, id);
+		 
+		Issue issue = issueList.getIssueById(id);
+		assertEquals("Bug", issue.getIssueType());
+		assertEquals("summary", issue.getSummary());
+		assertEquals("[New] note", issue.getNotes().get(0));
 	}
 	
 
