@@ -539,22 +539,22 @@ public class Issue {
 	 */
 	private void setResolution(String resolution) {
 		
-		switch(resolution) {
-			case Command.R_FIXED:
-				this.resolution = Resolution.FIXED;
-				break;
-			case Command.R_DUPLICATE:
-				this.resolution = Resolution.DUPLICATE;
-				break;
-			case Command.R_WONTFIX:
-				this.resolution = Resolution.WONTFIX;
-				break;
-			case Command.R_WORKSFORME:
-				this.resolution = Resolution.WORKSFORME;
-				break;
-			default:
-				this.resolution = null;
+		if(resolution.equals(Command.R_FIXED)) {
+			this.resolution = Resolution.FIXED;
 		}
+		
+		if(resolution.equals(Command.R_DUPLICATE)) {
+			this.resolution = Resolution.DUPLICATE;
+		}
+		
+		if(resolution.equals(Command.R_WONTFIX)) {
+			this.resolution = Resolution.WONTFIX;
+		}
+		
+		if(resolution.equals(Command.R_WORKSFORME)) {
+			this.resolution = Resolution.WORKSFORME;
+		}
+		
 
 	}
 		
@@ -612,7 +612,7 @@ public class Issue {
 		case WORKSFORME:
 				return Command.R_WORKSFORME;
 			default:
-				return null;
+				return "";
 		}
 	}
 	

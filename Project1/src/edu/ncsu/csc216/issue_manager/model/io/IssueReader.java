@@ -36,18 +36,12 @@ public class IssueReader {
 				fileString += fileReader.nextLine() + "\n";
 			}
 			
-			String[] issueStrings = fileString.split("\\r?\\n?[*]");
+			Scanner lineReader = new Scanner(fileString);
+			lineReader.useDelimiter("\\r?\\n?[*]");
 			
-			for(int i = 0; i < issueStrings.length; i++) {
-				
-				try {
-					Issue issue = processIssue(issueStrings[i]);
-					issues.add(issue);
-				} 
-				
-				catch (IllegalArgumentException e) {
-					throw new IllegalArgumentException("Unable to load file.");
-				}
+			while (lineReader.hasNext()) {
+				Issue issue = processIssue(lineReader.next());
+				issues.add(issue);
 			}
 			
 			
@@ -64,40 +58,48 @@ public class IssueReader {
 	 * @return a processed issue
 	 */
 	private static Issue processIssue(String line) {
-		String[] lineBreaker = line.split(",");
+			Scanner lineBreaker = new Scanner(line);
+			lineBreaker.useDelimiter(",");
+			
+			 int id = lineBreaker.nextInt();
+			 String state = lineBreaker.next();
+			 String issueType = lineBreaker.next();
+			 String summary = lineBreaker.next();
+			 String owner = lineBreaker.next();
+			 boolean confirmed = Boolean.parseBoolean(lineBreaker.next());
+			 String resolution = lineBreaker.next();
+			 if(resolution == null) {
+				 resolution = "null";
+			 }
+			 String notes;
+			 
+			 if(lineBreaker.hasNext()) {
+				 notes = lineBreaker.next();
+			 }
+			 
+			 else {
+				 notes = resolution;
+				 resolution = "";
+			 }
 		
-		if(lineBreaker.length != 7 && lineBreaker.length != 8) {
-			throw new IllegalArgumentException("Unable to load file.");
-		}
+			 
+			 lineBreaker.close();
+			 
+			 Scanner notesReader = new Scanner(notes);
+			 notesReader.useDelimiter("\\r?\\n?[-]");
+			 
+			 ArrayList<String> noteList = new ArrayList<>();
+			 
+			 while(notesReader.hasNext()) {
+				 noteList.add(notesReader.next());
+			 }
+			
+			Issue issue = new Issue(id, state, issueType, summary, owner, confirmed, resolution, noteList);
+			return issue;
 		
-		int id = Integer.parseInt(lineBreaker[0]);
-		String state = lineBreaker[1];
-        String issueType = lineBreaker[2];
-        String summary = lineBreaker[3];
-        String owner = lineBreaker[4];
-        boolean confirmed = Boolean.parseBoolean(lineBreaker[5]);
-        String resolution;
-        ArrayList<String> notes = new ArrayList<>();
+       }
         
-        String notesString;
-        if(lineBreaker.length == 7) {
-        	resolution = "";
-        	notesString = lineBreaker[6];
-  	
-        }
-        
-        else {
-        	resolution = lineBreaker[6];
-        	notesString = lineBreaker[7];
-        }
-        
-        String[] noteParts = notesString.split("\\r?\\n?[-]");
-    	for(int i = 1; i < noteParts.length; i++) {
-    		notes.add(noteParts[i]);
-    	}
     	
-    	Issue issue = new Issue(id, state, issueType, summary, owner, confirmed, resolution, notes);
-    	return issue;
-	}
-
+    	
 }
+
