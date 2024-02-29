@@ -275,6 +275,7 @@ public class Issue {
 					
 				case REOPEN:
 					state = workingState;
+					resolution = null;
 					addNote(note);
 					break;
 					
