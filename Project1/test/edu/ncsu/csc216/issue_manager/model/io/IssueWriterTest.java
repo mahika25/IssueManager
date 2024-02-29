@@ -43,12 +43,6 @@ public class IssueWriterTest {
 		checkFiles("test-files/issue10.txt", "test-files/writeRecords.txt");
 	}
 	
-	/** Tests writeIssuesToFile method */
-	@Test
-	public void testWriteIssuesToFileInvalid() {
-		
-		
-	}
 		
 
 		/**

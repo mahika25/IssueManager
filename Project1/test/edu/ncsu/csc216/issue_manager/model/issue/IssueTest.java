@@ -36,7 +36,7 @@ public class IssueTest {
 		assertEquals(summary, issue.getSummary());
 		assertEquals("[New] note", issue.getNotes().get(0));
 		assertEquals(null, issue.getOwner());
-		assertEquals(false, issue.isConfirmed());
+		assertFalse(issue.isConfirmed());
 		assertEquals("New", issue.getStateName());
 		assertNull(issue.getResolution());
 		

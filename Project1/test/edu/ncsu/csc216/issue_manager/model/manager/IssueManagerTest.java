@@ -72,7 +72,7 @@ public class IssueManagerTest {
 	/**Tests loadIssuesFromFile method */
 	@Test
 	public void testLoadIssuesFromFile() {
-		
+		fail();
 	}
 	
 	/**Tests createNewIssueList method */
