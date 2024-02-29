@@ -14,7 +14,9 @@ public class IssueManagerTest {
 	/**Tests getInstance method */
 	@Test
 	public void testGetInstance() {
-		fail();
+		IssueManager manager1 = IssueManager.getInstance();
+		IssueManager manager2 = IssueManager.getInstance();
+		assertSame(manager1, manager2);
 	}
 	
 	/**Tests saveIssuesToFile method */
@@ -32,13 +34,31 @@ public class IssueManagerTest {
 	/**Tests createNewIssueList method */
 	@Test
 	public void testCreateNewIssueList() {
-		fail();
+		IssueManager manager = IssueManager.getInstance();
+		manager.createNewIssueList();
+		assertEquals(0, manager.getIssueListAsArray().length);
 	}
 	
 	/**Tests getIssueListAsArray method */
 	@Test
 	public void testGetIssueListAsArray() {
-		fail();
+		IssueManager manager = IssueManager.getInstance();
+	    manager.createNewIssueList();
+	    manager.addIssueToList(IssueType.BUG, "summary1", "note1");
+	    manager.addIssueToList(IssueType.ENHANCEMENT, "summary2", "note2");
+	    Object[][] issueArray = manager.getIssueListAsArray();
+	    
+	    assertEquals(2, issueArray.length);
+	    
+	    assertEquals("1", issueArray[0][0].toString());
+	    assertEquals("New", issueArray[0][1].toString());
+	    assertEquals("Bug", issueArray[0][2].toString());
+	    assertEquals("summary1", issueArray[0][3].toString());
+	    
+	    assertEquals("2", issueArray[1][0].toString());
+	    assertEquals("New", issueArray[1][1].toString());
+	    assertEquals("Enhancement", issueArray[1][2].toString());
+	    assertEquals("summary2", issueArray[1][3].toString());
 	}
 	
 	/**Tests getIssueListAsArrayByIssueType method */
