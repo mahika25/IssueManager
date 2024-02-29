@@ -1,6 +1,5 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
