@@ -228,6 +228,9 @@ public class Issue {
 							addNote(note);
 						}
 					}
+					
+					resolution = null;
+					
 					break;
 					
 				default:
