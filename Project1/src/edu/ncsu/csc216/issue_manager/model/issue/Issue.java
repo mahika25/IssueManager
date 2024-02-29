@@ -319,6 +319,10 @@ public class Issue {
 					state = closedState;
 					addNote(note);
 				}
+				
+				if(r.equals(Resolution.WORKSFORME) && issueType.equals(IssueType.BUG)) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
 				break;
 				
 			default:
