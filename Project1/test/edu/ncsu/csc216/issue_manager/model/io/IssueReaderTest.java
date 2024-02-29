@@ -18,6 +18,7 @@ public class IssueReaderTest {
 		ArrayList<Issue> issues = IssueReader.readIssuesFromFile("test-files/issue1.txt");
         assertEquals(5, issues.size());
         
+        
         // Test individual issues
         Issue issue1 = issues.get(0);
         assertEquals(1, issue1.getIssueId());

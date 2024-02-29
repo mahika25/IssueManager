@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.Test;
+
+import edu.ncsu.csc216.issue_manager.model.io.IssueReader;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 
@@ -146,18 +148,26 @@ public class IssueManagerTest {
         assertEquals(0, list.getIssues().size());
 	}
 	
-	/**Tests addIssueToList method */
+	/**Tests getIssueListAsArrayByIssueType method */
 	@Test
-	public void testAddIssueToList() {
-		IssueList issueList = new IssueList();
-		int id = issueList.addIssue(IssueType.BUG, "summary", "note");
-		assertEquals(1, id);
-		 
-		Issue issue = issueList.getIssueById(id);
-		assertEquals("Bug", issue.getIssueType());
-		assertEquals("summary", issue.getSummary());
-		assertEquals("[New] note", issue.getNotes().get(0));
+	public void testGetIssueListAsArrayByIssueType2() {
+		manager.loadIssuesFromFile("test-files/issue1.txt");
+	    Object[][] issueArray = manager.getIssueListAsArrayByIssueType("Bug");
+	    
+	    assertEquals(2, issueArray.length);
+	    
+	    assertEquals("1", issueArray[0][0].toString());
+	    assertEquals("New", issueArray[0][1].toString());
+	    assertEquals("Bug", issueArray[0][2].toString());
+	    assertEquals("summary1", issueArray[0][3].toString());
+	    
+	    assertEquals("3", issueArray[1][0].toString());
+	    assertEquals("New", issueArray[1][1].toString());
+	    assertEquals("Bug", issueArray[1][2].toString());
+	    assertEquals("summary3", issueArray[1][3].toString());
 	}
+	
+
 	
 
 }

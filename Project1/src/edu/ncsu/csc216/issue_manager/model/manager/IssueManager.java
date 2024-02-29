@@ -47,7 +47,7 @@ public class IssueManager {
      * @param filename The name of the file to load from
      */
 	public void loadIssuesFromFile(String filename) {
-		IssueReader.readIssuesFromFile(filename);
+		issueList.addIssues(IssueReader.readIssuesFromFile(filename));
 	}
 	
 	/**
