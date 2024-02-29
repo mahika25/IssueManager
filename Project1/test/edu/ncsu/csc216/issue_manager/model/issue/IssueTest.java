@@ -116,6 +116,22 @@ public class IssueTest {
 		
 	}
 	
+	/** Tests testUpdate method that throws an assertion*/
+	@Test
+	public void testUpdateFail() {
+		ArrayList<String> notes = new ArrayList<>();
+		Issue issue = new Issue(id, "New", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
+		assertEquals("New", issue.getStateName());
+		
+		Command c = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.DUPLICATE, "note");
+		issue.update(c);
+		assertEquals("Closed", issue.getStateName());
+		
+		Command c2 = new Command(CommandValue.CONFIRM, "mkpatil", Resolution.DUPLICATE, "note2");
+		assertThrows(UnsupportedOperationException.class, () -> issue.update(c2));
+		
+	}
+	
 	
 	
 
