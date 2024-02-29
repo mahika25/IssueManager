@@ -647,9 +647,6 @@ public class Issue {
 	 * @return owner of the issue
 	 */
 	public String getOwner() {
-		if(owner == null) {
-			owner = "";
-		}
 		return owner;
 	}
 	
