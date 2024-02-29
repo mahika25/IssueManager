@@ -77,7 +77,7 @@ public class IssueReader {
 			 
 			 else {
 				 notes = resolution;
-				 resolution = "";
+				 resolution = null;
 			 }
 		
 			 
