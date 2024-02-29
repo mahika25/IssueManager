@@ -1,8 +1,15 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import org.junit.Test;
 
+import edu.ncsu.csc216.issue_manager.model.io.IssueWriter;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 
@@ -25,13 +32,47 @@ public class IssueManagerTest {
 	/**Tests saveIssuesToFile method */
 	@Test
 	public void testSaveIssuesToFile() {
-		fail();
+		manager.createNewIssueList();
+		ArrayList<String> notes1 = new ArrayList<>();
+		notes1.add("[New] Note 1");
+		notes1.add("[Confirmed] Note 2");
+		notes1.add("[Working] Note 3");
+		manager.addIssueToList(IssueType.BUG, "summary", "note");
+		
+		
+		try {
+			manager.saveIssuesToFile("test-files/writeRecords.txt");
+		} catch (IllegalArgumentException e) {
+			fail("Cannot write to issues to file");
+		}
+		
+		checkFiles("test-files/IssueManagerTest.txt", "test-files/writeRecords.txt");
+	}
+	
+	/**
+	 * Helper method to compare two files for the same contents
+	 * @param expFile expected output
+	 * @param actFile actual output
+	 */
+	private void checkFiles(String expFile, String actFile) {
+		try (Scanner expScanner = new Scanner(new File(expFile));
+			 Scanner actScanner = new Scanner(new File(actFile));) {
+			
+			while (expScanner.hasNextLine()) {
+				assertEquals(expScanner.nextLine(), actScanner.nextLine());
+			}
+			
+			expScanner.close();
+			actScanner.close();
+		} catch (IOException e) {
+			fail("Error reading files.");
+		}
 	}
 	
 	/**Tests loadIssuesFromFile method */
 	@Test
 	public void testLoadIssuesFromFile() {
-		fail();
+		
 	}
 	
 	/**Tests createNewIssueList method */
@@ -65,7 +106,23 @@ public class IssueManagerTest {
 	/**Tests getIssueListAsArrayByIssueType method */
 	@Test
 	public void testGetIssueListAsArrayByIssueType() {
-		fail();
+		manager.createNewIssueList();
+	    manager.addIssueToList(IssueType.BUG, "summary1", "note1");
+	    manager.addIssueToList(IssueType.ENHANCEMENT, "summary2", "note2");
+	    manager.addIssueToList(IssueType.BUG, "summary3", "note3");
+	    Object[][] issueArray = manager.getIssueListAsArrayByIssueType("Bug");
+	    
+	    assertEquals(2, issueArray.length);
+	    
+	    assertEquals("1", issueArray[0][0].toString());
+	    assertEquals("New", issueArray[0][1].toString());
+	    assertEquals("Bug", issueArray[0][2].toString());
+	    assertEquals("summary1", issueArray[0][3].toString());
+	    
+	    assertEquals("3", issueArray[1][0].toString());
+	    assertEquals("New", issueArray[1][1].toString());
+	    assertEquals("Bug", issueArray[1][2].toString());
+	    assertEquals("summary3", issueArray[1][3].toString());
 	}
 	
 	/**Tests getIssueById method */

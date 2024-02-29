@@ -28,6 +28,7 @@ public class IssueListTest {
 		assertEquals("Bug", issue.getIssueType());
 		assertEquals("summary", issue.getSummary());
 		assertEquals("[New] note", issue.getNotes().get(0));
+
 		
 	}
 	
