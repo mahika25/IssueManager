@@ -38,7 +38,7 @@ public class IssueTest {
 		assertEquals(null, issue.getOwner());
 		assertEquals(false, issue.isConfirmed());
 		assertEquals("New", issue.getStateName());
-		//assertEquals(null, issue.getResolution());
+		assertNull(issue.getResolution());
 		
 	}
 	
@@ -85,9 +85,34 @@ public class IssueTest {
 		issue.update(c2);
 		assertEquals("Closed", issue.getStateName());
 		
-		Command c3 = new Command(CommandValue.REOPEN, "mkpatil", Resolution.FIXED, "note2");
+		Command c3 = new Command(CommandValue.REOPEN, "mkpatil", Resolution.FIXED, "note3");
 		issue.update(c3);
 		assertEquals("Working", issue.getStateName());
+		
+	}
+	
+	/** Tests testUpdate method */
+	@Test
+	public void testUpdate3() {
+		ArrayList<String> notes = new ArrayList<>();
+		Issue issue = new Issue(id, "New", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
+		assertEquals("New", issue.getStateName());
+		
+		Command c = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.DUPLICATE, "note");
+		issue.update(c);
+		assertEquals("Closed", issue.getStateName());
+		
+		Command c2 = new Command(CommandValue.REOPEN, "mkpatil", Resolution.DUPLICATE, "note2");
+		issue.update(c2);
+		assertEquals("Confirmed", issue.getStateName());
+		
+		Command c3 = new Command(CommandValue.ASSIGN, "mkpatil", Resolution.DUPLICATE, "note3");
+		issue.update(c3);
+		assertEquals("Working", issue.getStateName());
+		
+		Command c4 = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.DUPLICATE, "note2");
+		issue.update(c4);
+		assertEquals("Closed", issue.getStateName());
 		
 	}
 	

@@ -39,7 +39,7 @@ public class IssueList {
 		if(!issues.isEmpty()) {
 			Issue lastIssue = issues.get(issues.size() - 1);
 			int maxId = lastIssue.getIssueId();
-			counter = maxId++;
+			counter = maxId + 1;
 		}
 		
 		else {

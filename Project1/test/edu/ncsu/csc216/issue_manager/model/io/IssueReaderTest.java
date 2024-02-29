@@ -28,7 +28,7 @@ public class IssueReaderTest {
         assertEquals(false, issue1.isConfirmed());
         assertEquals("", issue1.getResolution());
         assertEquals(1, issue1.getNotes().size());
-        assertEquals("Note 1", issue1.getNotes().get(0));
+        assertEquals("[New] Note 1", issue1.getNotes().get(0));
         
         
         Issue issue2 = issues.get(3);

@@ -43,6 +43,7 @@ public class IssueReader {
 				Issue issue = processIssue(lineReader.next());
 				issues.add(issue);
 			}
+			lineReader.close();
 			
 			
 		} catch (FileNotFoundException e) {
@@ -68,9 +69,6 @@ public class IssueReader {
 			 String owner = lineBreaker.next();
 			 boolean confirmed = Boolean.parseBoolean(lineBreaker.next());
 			 String resolution = lineBreaker.next();
-			 if(resolution == null) {
-				 resolution = "null";
-			 }
 			 String notes;
 			 
 			 if(lineBreaker.hasNext()) {
@@ -93,6 +91,8 @@ public class IssueReader {
 			 while(notesReader.hasNext()) {
 				 noteList.add(notesReader.next());
 			 }
+			 
+			 notesReader.close();
 			
 			Issue issue = new Issue(id, state, issueType, summary, owner, confirmed, resolution, noteList);
 			return issue;

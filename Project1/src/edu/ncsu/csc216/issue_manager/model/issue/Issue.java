@@ -600,6 +600,9 @@ public class Issue {
 	 * @return resolution of the issue
 	 */
 	public String getResolution() {
+		if(resolution == null) {
+			return null;
+		}
 		switch(resolution) {
 			case FIXED:
 				return Command.R_FIXED;
@@ -610,7 +613,7 @@ public class Issue {
 		case WORKSFORME:
 				return Command.R_WORKSFORME;
 			default:
-				return "";
+				return null;
 		}
 	}
 	

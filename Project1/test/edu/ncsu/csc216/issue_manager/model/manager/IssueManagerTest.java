@@ -45,7 +45,7 @@ public class IssueManagerTest {
 	@Test
 	public void testGetIssueListAsArray() {
 	    manager.createNewIssueList();
-	    //manager.addIssueToList(IssueType.BUG, "summary1", "note1");
+	    manager.addIssueToList(IssueType.BUG, "summary1", "note1");
 	    manager.addIssueToList(IssueType.ENHANCEMENT, "summary2", "note2");
 	    Object[][] issueArray = manager.getIssueListAsArray();
 	    
