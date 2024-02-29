@@ -1,6 +1,8 @@
 package edu.ncsu.csc216.issue_manager.model.issue;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
@@ -51,7 +53,7 @@ public class IssueTest {
 	@Test
 	public void testUpdate() {
 		Issue issue = new Issue(id, issueType, summary, note);
-		assertEquals("Enhancement", issue.getIssueType());
+		assertEquals("New", issue.getStateName());
 		
 		Command c = new Command(CommandValue.ASSIGN, "mkpatil", Resolution.WONTFIX, "note");
 		issue.update(c);
@@ -65,6 +67,27 @@ public class IssueTest {
 		Command c3 = new Command(CommandValue.VERIFY, "mkpatil", Resolution.FIXED, "note2");
 		issue.update(c3);
 		assertEquals("Closed", issue.getStateName());
+		
+	}
+	
+	/** Tests testUpdate method */
+	@Test
+	public void testUpdate2() {
+		ArrayList<String> notes = new ArrayList<>();
+		Issue issue = new Issue(id, "New", "Bug", "summary", "mkpatil", true, "Duplicate", notes);
+		assertEquals("New", issue.getStateName());
+		
+		Command c = new Command(CommandValue.CONFIRM, "mkpatil", Resolution.WONTFIX, "note");
+		issue.update(c);
+		assertEquals("Confirmed", issue.getStateName());
+		
+		Command c2 = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.WONTFIX, "note2");
+		issue.update(c2);
+		assertEquals("Closed", issue.getStateName());
+		
+		Command c3 = new Command(CommandValue.REOPEN, "mkpatil", Resolution.FIXED, "note2");
+		issue.update(c3);
+		assertEquals("Working", issue.getStateName());
 		
 	}
 	
