@@ -416,8 +416,6 @@ public class Issue {
 		}
 		
 		setIssueId(id);
-		//this.issueId = Issue.counter;
-		//incrementCounter();
 		this.state = newState;
 		this.issueType = issueType;
 		this.summary = summary;
@@ -662,6 +660,9 @@ public class Issue {
 	 */
 	public String toString() {
 		String issueString = "";
+		if(owner == null) {
+			owner = "";
+		}
 		issueString += "*" + issueId + "," + getStateName() + "," + getIssueType() + ","
 				+ summary + "," + owner + "," + confirmed + ",";
 		

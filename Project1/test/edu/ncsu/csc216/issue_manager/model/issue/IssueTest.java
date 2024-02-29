@@ -3,107 +3,72 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
+import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
+
 /**
  * Class to test the Issue class
  */
 public class IssueTest {
 	
-	/** Tests setIssueId method */
-	@Test
-	public void testSetIssueId() {
-		fail();
-	}
+	/**Issue ID for testing */
+	private int id = 1;
+	/**Issue owner for testing */
+	private IssueType issueType = IssueType.ENHANCEMENT;
+	/**Issue summary for testing */
+	private String summary = "summary";
+	/**Issue note for testing */
+	private String note = "note";
+
 	
-	/** Tests setState method */
-	@Test
-	public void testSetState() {
-		fail();
-	}
 	
-	/** Tests setIssueType method */
+	/** Tests all getter and setter methods in the class*/
 	@Test
-	public void testSetIssueType() {
-		fail();
-	}
-	
-	/** Tests setSummary method */
-	@Test
-	public void testSetSummary() {
-		fail();
-	}
-	
-	/** Tests setOwner method */
-	@Test
-	public void testSetOwner() {
-		fail();
-	}
-	
-	/** Tests setConfirmed method */
-	@Test
-	public void testSetConfirmed() {
-		fail();
-	}
-	
-	/** Tests setResolution method */
-	@Test
-	public void testSetResolution() {
-		fail();
-	}
-	
-	/** Tests setNotes method */
-	@Test
-	public void testSetNotes() {
-		fail();
-	}
-	
-	/** Tests setIsConfirmed method */
-	@Test
-	public void testIsConfirmed() {
-		fail();
+	public void testGetterMethods() {
+		
+		Issue issue = new Issue(id, issueType, summary, note);
+		assertEquals(1, issue.getIssueId());
+		assertEquals("Enhancement", issue.getIssueType());
+		assertEquals(summary, issue.getSummary());
+		assertEquals("[New] note", issue.getNotes().get(0));
+		assertEquals(null, issue.getOwner());
+		assertEquals(false, issue.isConfirmed());
+		assertEquals("New", issue.getStateName());
+		//assertEquals(null, issue.getResolution());
+		
 	}
 	
 	/** Tests toString method */
 	@Test
 	public void testToString() {
-		fail();
+		Issue issue = new Issue(id, issueType, summary, note);
+		assertEquals("*1,New,Enhancement,summary,,false,\n-[New] note \n", issue.toString());
 	}
 	
 	/** Tests testUpdate method */
 	@Test
 	public void testUpdate() {
-		fail();
+		Issue issue = new Issue(id, issueType, summary, note);
+		assertEquals("Enhancement", issue.getIssueType());
+		
+		Command c = new Command(CommandValue.ASSIGN, "mkpatil", Resolution.WONTFIX, "note");
+		issue.update(c);
+		assertEquals("mkpatil", issue.getOwner());
+		assertEquals("Working", issue.getStateName());
+		
+		Command c2 = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.FIXED, "note2");
+		issue.update(c2);
+		assertEquals("Verifying", issue.getStateName());
+		
+		Command c3 = new Command(CommandValue.VERIFY, "mkpatil", Resolution.FIXED, "note2");
+		issue.update(c3);
+		assertEquals("Closed", issue.getStateName());
+		
 	}
 	
 	
-	/** Tests setUpdate method in the new state*/
-	@Test
-	public void testUpdateStateNew() {
-		fail();
-	}
-	
-	/** Tests setUpdate method in the working state*/
-	@Test
-	public void testUpdateStateWorking() {
-		fail();
-	}
-	
-	/** Tests setUpdate method in the closed state*/
-	@Test
-	public void testUpdateStateClosed() {
-		fail();
-	}
-	
-	/** Tests setUpdate method in the confirmed state*/
-	@Test
-	public void testUpdateStateConfirmed() {
-		fail();
-	}
-	
-	/** Tests setUpdate method in the verifying state*/
-	@Test
-	public void testUpdateStateVerifying() {
-		fail();
-	}
 	
 
 }

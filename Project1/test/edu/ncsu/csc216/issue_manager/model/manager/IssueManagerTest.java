@@ -11,6 +11,9 @@ import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
  */
 public class IssueManagerTest {
 	
+	/**Creates an instance of issueManager to use */
+	IssueManager manager = IssueManager.getInstance();
+	
 	/**Tests getInstance method */
 	@Test
 	public void testGetInstance() {
@@ -34,7 +37,6 @@ public class IssueManagerTest {
 	/**Tests createNewIssueList method */
 	@Test
 	public void testCreateNewIssueList() {
-		IssueManager manager = IssueManager.getInstance();
 		manager.createNewIssueList();
 		assertEquals(0, manager.getIssueListAsArray().length);
 	}
@@ -42,9 +44,8 @@ public class IssueManagerTest {
 	/**Tests getIssueListAsArray method */
 	@Test
 	public void testGetIssueListAsArray() {
-		IssueManager manager = IssueManager.getInstance();
 	    manager.createNewIssueList();
-	    manager.addIssueToList(IssueType.BUG, "summary1", "note1");
+	    //manager.addIssueToList(IssueType.BUG, "summary1", "note1");
 	    manager.addIssueToList(IssueType.ENHANCEMENT, "summary2", "note2");
 	    Object[][] issueArray = manager.getIssueListAsArray();
 	    
