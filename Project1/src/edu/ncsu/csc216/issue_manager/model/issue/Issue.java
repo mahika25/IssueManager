@@ -520,7 +520,14 @@ public class Issue {
 	 * @param owner owner to set for the issue
 	 */
 	private void setOwner(String owner) {
-		this.owner = owner;
+		if("".equals(owner)) {
+			this.owner = null;
+		}
+		
+		else {
+			this.owner = owner;
+		}
+		
 	}
 	
 	/** sets if the issue is confirmed or not 
