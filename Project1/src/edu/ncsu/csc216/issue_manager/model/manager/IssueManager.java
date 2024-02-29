@@ -82,6 +82,9 @@ public class IssueManager {
      * @return an array representation for the issues of a certain type
      */
 	public Object[][] getIssueListAsArrayByIssueType(String type) {
+		if(type ==  null) {
+			throw new IllegalArgumentException("Invalid type");
+		}
 		List<Issue> givenList = issueList.getIssuesByType(type);
 		String[][] issueArray = new String[givenList.size()][4];
 		

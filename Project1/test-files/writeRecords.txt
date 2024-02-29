@@ -1,2 +1,2 @@
-*1,New,Bug,summary,,false,
+*1,New,Bug,summary,null,false,
 -[New] note
