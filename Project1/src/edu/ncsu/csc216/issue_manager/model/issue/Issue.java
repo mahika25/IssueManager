@@ -689,9 +689,6 @@ public class Issue {
 	 */
 	public String toString() {
 		String issueString = "";
-		if(owner == null) {
-			owner = "";
-		}
 		issueString += "*" + issueId + "," + getStateName() + "," + getIssueType() + ","
 				+ summary + "," + owner + "," + confirmed + ",";
 		
