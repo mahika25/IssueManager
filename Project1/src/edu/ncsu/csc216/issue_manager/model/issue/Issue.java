@@ -224,7 +224,7 @@ public class Issue {
 						}
 						
 						else {
-							state = newState;
+							state = confirmedState;
 							addNote(note);
 						}
 					}
