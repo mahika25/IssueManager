@@ -59,7 +59,16 @@ public class IssueReader {
 	 * @return a processed issue
 	 */
 	private static Issue processIssue(String line) {
-			Scanner lineBreaker = new Scanner(line);
+			Scanner lineScanner = new Scanner(line);
+			String firstLine = lineScanner.nextLine();
+			String secondLine = "";
+			while(lineScanner.hasNextLine()){
+				secondLine += lineScanner.nextLine();
+			}
+			
+			lineScanner.close();
+			
+			Scanner lineBreaker = new Scanner(firstLine);
 			lineBreaker.useDelimiter(",");
 			
 			 int id = lineBreaker.nextInt();
@@ -68,22 +77,18 @@ public class IssueReader {
 			 String summary = lineBreaker.next();
 			 String owner = lineBreaker.next();
 			 boolean confirmed = Boolean.parseBoolean(lineBreaker.next());
-			 String resolution = lineBreaker.next();
-			 String notes;
-			 
+			 String resolution;
 			 if(lineBreaker.hasNext()) {
-				 notes = lineBreaker.next();
+				 resolution = lineBreaker.next();
 			 }
 			 
 			 else {
-				 notes = resolution;
 				 resolution = "";
 			 }
-		
-			 
+			
 			 lineBreaker.close();
 			 
-			 Scanner notesReader = new Scanner(notes);
+			 Scanner notesReader = new Scanner(secondLine);
 			 notesReader.useDelimiter("\\r?\\n?[-]");
 			 
 			 ArrayList<String> noteList = new ArrayList<>();

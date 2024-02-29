@@ -24,9 +24,9 @@ public class IssueReaderTest {
         assertEquals("New", issue1.getStateName());
         assertEquals("Enhancement", issue1.getIssueType());
         assertEquals("Issue description", issue1.getSummary());
-        assertEquals("", issue1.getOwner());
+        assertEquals(null, issue1.getOwner());
         assertFalse(issue1.isConfirmed());
-        assertEquals("", issue1.getResolution());
+        assertEquals(null, issue1.getResolution());
         assertEquals(1, issue1.getNotes().size());
         assertEquals("[New] Note 1", issue1.getNotes().get(0));
         
@@ -40,9 +40,9 @@ public class IssueReaderTest {
         assertFalse(issue2.isConfirmed());
         assertEquals("Fixed", issue2.getResolution());
         assertEquals(3, issue2.getNotes().size());
-        assertEquals(" Note 1", issue2.getNotes().get(0));
-        assertEquals(" Note 2", issue2.getNotes().get(1));
-        assertEquals(" Note 3", issue2.getNotes().get(2));
+        assertEquals("[New] Note 1", issue2.getNotes().get(0));
+        assertEquals("[Working] Note 2that goes on a new line", issue2.getNotes().get(1));
+        assertEquals("[Verifying] Note 3", issue2.getNotes().get(2));
 	}
 	
 
