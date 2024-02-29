@@ -82,7 +82,7 @@ public class Issue {
 					
 					
 				case CONFIRM:
-					if(issueType == IssueType.BUG && confirmed) {
+					if(issueType == IssueType.BUG) {
 						state = confirmedState;
 						addNote(note);
 
