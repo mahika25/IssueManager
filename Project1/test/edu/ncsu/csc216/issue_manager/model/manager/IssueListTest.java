@@ -80,7 +80,7 @@ public class IssueListTest {
 		IssueList list = new IssueList();
         assertEquals(0, list.getIssues().size());
         
-        // Adding an issue and executing commands on it
+      
         int id = list.addIssue(IssueType.BUG, "Bug summary", "Bug note");
         Command command = new Command(CommandValue.ASSIGN, "Owner", Resolution.DUPLICATE, "Note");
         list.executeCommand(id, command);
@@ -95,8 +95,6 @@ public class IssueListTest {
 	@Test
 	public void testDeleteIssueById() {
 		IssueList list = new IssueList();
-        
-        // Adding an issue and deleting it by ID
         int id = list.addIssue(IssueType.BUG, "summary", "note");
         assertEquals(1, list.getIssues().size());
         list.deleteIssueById(id);
