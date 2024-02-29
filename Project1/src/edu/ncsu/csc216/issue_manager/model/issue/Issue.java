@@ -688,7 +688,11 @@ public class Issue {
 			owner = "";
 		}
 		issueString += "*" + issueId + "," + getStateName() + "," + getIssueType() + ","
-				+ summary + "," + owner + "," + confirmed + "," + getResolution();
+				+ summary + "," + owner + "," + confirmed + ",";
+		
+		if(resolution != null) {
+			issueString += getResolution();
+		}
 		
 		issueString += '\n';
 		issueString += getNotesString();
