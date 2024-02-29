@@ -647,6 +647,9 @@ public class Issue {
 	 * @return owner of the issue
 	 */
 	public String getOwner() {
+		if(owner == null) {
+			owner = "";
+		}
 		return owner;
 	}
 	
@@ -690,7 +693,7 @@ public class Issue {
 	public String toString() {
 		String issueString = "";
 		issueString += "*" + issueId + "," + getStateName() + "," + getIssueType() + ","
-				+ summary + "," + owner + "," + confirmed + ",";
+				+ summary + "," + getOwner() + "," + confirmed + ",";
 		
 		if(resolution != null) {
 			issueString += getResolution();
