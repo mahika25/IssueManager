@@ -332,6 +332,10 @@ public class Issue {
 					addNote(note);
 				}
 				
+				if(r.equals(Resolution.DUPLICATE)) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
+				
 				if(r.equals(Resolution.WORKSFORME) && issueType.equals(IssueType.BUG)) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
