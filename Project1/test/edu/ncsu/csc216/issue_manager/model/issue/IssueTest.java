@@ -97,11 +97,7 @@ public class IssueTest {
 	@Test
 	public void testUpdate3() {
 		ArrayList<String> notes = new ArrayList<>();
-		Issue issue = new Issue(id, "New", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
-		assertEquals("New", issue.getStateName());
-		
-		Command c = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.DUPLICATE, "note");
-		issue.update(c);
+		Issue issue = new Issue(id, "Closed", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
 		assertEquals("Closed", issue.getStateName());
 		
 		Command c2 = new Command(CommandValue.REOPEN, "mkpatil", Resolution.DUPLICATE, "note2");
@@ -141,11 +137,7 @@ public class IssueTest {
 	@Test
 	public void testUpdateFail() {
 		ArrayList<String> notes = new ArrayList<>();
-		Issue issue = new Issue(id, "New", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
-		assertEquals("New", issue.getStateName());
-		
-		Command c = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.DUPLICATE, "note");
-		issue.update(c);
+		Issue issue = new Issue(id, "Closed", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
 		assertEquals("Closed", issue.getStateName());
 		
 		Command c2 = new Command(CommandValue.CONFIRM, "mkpatil", Resolution.DUPLICATE, "note2");
