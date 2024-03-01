@@ -100,6 +100,9 @@ public class IssueList {
 	 * @return list of all issues
 	 */
 	public List<Issue> getIssuesByType(String type){
+		if(type ==  null) {
+			throw new IllegalArgumentException("Invalid type");
+		}
 		ArrayList<Issue> typeList = new ArrayList<>();
 		for(int i = 0; i < issues.size(); i++) {
 			if(issues.get(i).getIssueType().equals(type)) {
