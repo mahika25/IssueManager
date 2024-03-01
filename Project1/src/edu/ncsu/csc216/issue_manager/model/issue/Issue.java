@@ -337,7 +337,7 @@ public class Issue {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				
-				if(r.equals(Resolution.WORKSFORME) && issueType.equals(IssueType.BUG)) {
+				if((r.equals(Resolution.WORKSFORME) || r.equals(Resolution.FIXED)) && issueType.equals(IssueType.BUG)) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				break;
