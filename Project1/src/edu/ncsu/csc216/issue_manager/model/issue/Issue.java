@@ -526,6 +526,9 @@ public class Issue {
 	 * @throws IllegalArgumentException if invalid string is given
 	 */
 	private void setIssueType(String type) {
+		if(type == null) {
+			throw new IllegalArgumentException("Issue cannot be created.");
+		}
 		if(type.equals(I_ENHANCEMENT)) {
 			this.issueType = IssueType.ENHANCEMENT;
 		}
