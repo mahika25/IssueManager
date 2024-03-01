@@ -68,7 +68,7 @@ public class IssueManager {
 		
 		for(int i = 0; i < givenList.size(); i++) {
 			Issue curIssue = givenList.get(i);
-			issueArray[i][0] = Integer.toString(curIssue.getIssueId());
+			issueArray[i][0] = String.valueOf(curIssue.getIssueId());
 			issueArray[i][1] = curIssue.getStateName();
 			issueArray[i][2] = curIssue.getIssueType();
 			issueArray[i][3] = curIssue.getSummary();	
