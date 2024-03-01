@@ -225,8 +225,17 @@ public class Issue {
 						}
 						
 						else {
-							state = newState;
-							addNote(note);
+							if(confirmed) {
+								state = confirmedState;
+								setConfirmed(true);
+								addNote(note);
+							}
+							
+							else {
+								state = newState;
+								addNote(note);
+							}
+							
 						}
 					}
 					
