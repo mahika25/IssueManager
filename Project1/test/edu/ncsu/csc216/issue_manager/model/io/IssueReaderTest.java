@@ -42,7 +42,7 @@ public class IssueReaderTest {
         assertEquals("Fixed", issue2.getResolution());
         assertEquals(3, issue2.getNotes().size());
         assertEquals("[New] Note 1", issue2.getNotes().get(0));
-        assertEquals("[Working] Note 2that goes on a new line", issue2.getNotes().get(1));
+        assertEquals("[Working] Note 2\nthat goes on a new line", issue2.getNotes().get(1));
         assertEquals("[Verifying] Note 3", issue2.getNotes().get(2));
 	}
 	

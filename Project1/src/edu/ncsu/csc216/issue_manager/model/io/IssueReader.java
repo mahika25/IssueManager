@@ -64,6 +64,7 @@ public class IssueReader {
 			String secondLine = "";
 			while(lineScanner.hasNextLine()){
 				secondLine += lineScanner.nextLine();
+				secondLine += "\n";
 			}
 			
 			lineScanner.close();
@@ -89,12 +90,12 @@ public class IssueReader {
 			 lineBreaker.close();
 			 
 			 Scanner notesReader = new Scanner(secondLine);
-			 notesReader.useDelimiter("\\r?\\n?[-]");
+			 notesReader.useDelimiter("-");
 			 
 			 ArrayList<String> noteList = new ArrayList<>();
 			 
 			 while(notesReader.hasNext()) {
-				 noteList.add(notesReader.next());
+				 noteList.add(notesReader.next().trim());
 			 }
 			 
 			 notesReader.close();
