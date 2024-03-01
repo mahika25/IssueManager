@@ -459,7 +459,7 @@ public class Issue {
 	 * @param notes list of notes associated with an issue
 	 */
 	public Issue(int id, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
-		if(("Working".equals(state) || "Verifying".equals(state) || "New".equals(state)) && "Bug".equals(issueType) && !confirmed) {
+		if(("Working".equals(state) || "Verifying".equals(state)) && "Bug".equals(issueType) && !confirmed) {
 			throw new IllegalArgumentException("Invalid issue");
 		}
 		
