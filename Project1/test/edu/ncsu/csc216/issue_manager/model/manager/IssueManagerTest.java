@@ -156,15 +156,15 @@ public class IssueManagerTest {
 	    
 	    assertEquals(2, issueArray.length);
 	    
-	    assertEquals("1", issueArray[0][0].toString());
-	    assertEquals("New", issueArray[0][1].toString());
+	    assertEquals("3", issueArray[0][0].toString());
+	    assertEquals("Confirmed", issueArray[0][1].toString());
 	    assertEquals("Bug", issueArray[0][2].toString());
-	    assertEquals("summary1", issueArray[0][3].toString());
+	    assertEquals("Issue description", issueArray[0][3].toString());
 	    
-	    assertEquals("3", issueArray[1][0].toString());
-	    assertEquals("New", issueArray[1][1].toString());
+	    assertEquals("7", issueArray[1][0].toString());
+	    assertEquals("Working", issueArray[1][1].toString());
 	    assertEquals("Bug", issueArray[1][2].toString());
-	    assertEquals("summary3", issueArray[1][3].toString());
+	    assertEquals("Issue description", issueArray[1][3].toString());
 	}
 	
 
