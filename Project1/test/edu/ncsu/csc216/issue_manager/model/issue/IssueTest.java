@@ -68,6 +68,8 @@ public class IssueTest {
 		issue.update(c3);
 		assertEquals("Closed", issue.getStateName());
 		
+		
+		
 	}
 	
 	/** Tests testUpdate method */
@@ -113,6 +115,25 @@ public class IssueTest {
 		Command c4 = new Command(CommandValue.RESOLVE, "mkpatil", Resolution.DUPLICATE, "note2");
 		issue.update(c4);
 		assertEquals("Closed", issue.getStateName());
+		
+	}
+	
+	/** Tests testUpdate method */
+	@Test
+	public void testUpdate4() {
+		ArrayList<String> notes = new ArrayList<>();
+		Issue issue = new Issue(id, "New", "Bug", "summary", null, true, "Duplicate", notes);
+		assertEquals("New", issue.getStateName());
+		
+		Command c = new Command(CommandValue.RESOLVE, null, Resolution.DUPLICATE, "note");
+		issue.update(c);
+		assertEquals("Closed", issue.getStateName());
+		
+		Command c2 = new Command(CommandValue.REOPEN, null, Resolution.DUPLICATE, "note2");
+		issue.update(c2);
+		assertEquals("Confirmed", issue.getStateName());
+		
+
 		
 	}
 	
