@@ -64,11 +64,11 @@ public class IssueManager {
      */
 	public Object[][] getIssueListAsArray() {
 		List<Issue> givenList = issueList.getIssues();
-		String[][] issueArray = new String[givenList.size()][4];
+		Object[][] issueArray = new Object[givenList.size()][4];
 		
 		for(int i = 0; i < givenList.size(); i++) {
 			Issue curIssue = givenList.get(i);
-			issueArray[i][0] = String.valueOf(curIssue.getIssueId());
+			issueArray[i][0] = curIssue.getIssueId();
 			issueArray[i][1] = curIssue.getStateName();
 			issueArray[i][2] = curIssue.getIssueType();
 			issueArray[i][3] = curIssue.getSummary();	
@@ -86,12 +86,16 @@ public class IssueManager {
 		if(type ==  null) {
 			throw new IllegalArgumentException("Invalid type");
 		}
-		List<Issue> givenList = issueList.getIssuesByType(type);
-		String[][] issueArray = new String[givenList.size()][4];
 		
-		for(int i = 0; i < givenList.size(); i++) {
-			Issue curIssue = givenList.get(i);
-			issueArray[i][0] = Integer.toString(curIssue.getIssueId());
+		if(!"Bug".equals("Bug") || !"Enhancement".equals("Enhancement")) {
+			return new Object[0][0];
+		}
+		
+		Object[][] issueArray = new Object[issueList.getIssuesByType(type).size()][4];
+		
+		for(int i = 0; i < issueList.getIssuesByType(type).size(); i++) {
+			Issue curIssue = issueList.getIssuesByType(type).get(i);
+			issueArray[i][0] = curIssue.getIssueId();
 			issueArray[i][1] = curIssue.getStateName();
 			issueArray[i][2] = curIssue.getIssueType();
 			issueArray[i][3] = curIssue.getSummary();	
