@@ -53,12 +53,12 @@ public class IssueList {
 	
 	/**
 	 * Add multiple issues to a list
-	 * @param issues issues to be added
+	 * @param issuesList issues to be added
 	 */
-	public void addIssues(List<Issue> issues) {
+	public void addIssues(List<Issue> issuesList) {
 		issues.clear();
-		for(int i = 0; i < issues.size(); i++) {
-			addIssue(issues.get(i));
+		for(int i = 0; i < issuesList.size(); i++) {
+			addIssue(issuesList.get(i));
 		}
 	}
 	
