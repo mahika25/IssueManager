@@ -56,7 +56,7 @@ public class IssueList {
 	 * @param issues issues to be added
 	 */
 	public void addIssues(List<Issue> issues) {
-		
+		issues.clear();
 		for(int i = 0; i < issues.size(); i++) {
 			addIssue(issues.get(i));
 		}
