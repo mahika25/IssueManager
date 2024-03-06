@@ -271,9 +271,6 @@ public class Issue {
 		public void updateState(Command command) {
 			
 			String note = command.getNote();
-			if("".equals(note) || note == null) {
-				throw new IllegalArgumentException("Invalid information.");
-			}
 			
 			switch(command.getCommand()) {
 			

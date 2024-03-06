@@ -136,6 +136,39 @@ public class IssueTest {
 		
 	}
 	
+	/** Tests testUpdate method */
+	@Test
+	public void testUpdate5() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add(note);
+		Issue issue = new Issue(id, "Closed", "Enhancement", "summary", "mkpatil", false, "Duplicate", notes);
+		assertEquals("Closed", issue.getStateName());
+		
+		Command c = new Command(CommandValue.REOPEN, "mk", Resolution.DUPLICATE, "note2");
+		issue.update(c);
+		assertEquals("Working", issue.getStateName());
+		
+		
+
+		
+	}
+	
+	/** Tests testUpdate method */
+	@Test
+	public void testUpdate6() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add(note);
+		Issue issue = new Issue(id, "Verifying", "Enhancement", "summary", "mkpatil", false, "Fixed", notes);
+		assertEquals("Verifying", issue.getStateName());
+		
+		Command c6 = new Command(CommandValue.REOPEN, "mk", Resolution.DUPLICATE, null);
+		//assertThrows(IllegalArgumentException.class, () -> issue.update(c6));
+		
+		
+
+		
+	}
+	
 	/** Tests testUpdate method that throws an assertion*/
 	@Test
 	public void testUpdateFail() {
@@ -148,6 +181,8 @@ public class IssueTest {
 		assertThrows(UnsupportedOperationException.class, () -> issue.update(c2));
 		
 	}
+	
+	
 	
 	
 	
