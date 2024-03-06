@@ -468,8 +468,40 @@ public class Issue {
 	 * @param notes list of notes associated with an issue
 	 */
 	public Issue(int id, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
-		if(("Working".equals(state) || "Verifying".equals(state)) && "Bug".equals(issueType) && !confirmed) {
-			throw new IllegalArgumentException("Invalid issue");
+		if(notes != null && notes.size() < 1) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if(notes == null) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if((WORKING_NAME.equals(state) || VERIFYING_NAME.equals(state)) && ("".equals(owner) || owner == null)) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if((NEW_NAME.equals(state) || CONFIRMED_NAME.equals(state)) && (!"".equals(owner) || owner != null)) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if((VERIFYING_NAME.equals(state) || CLOSED_NAME.equals(state)) && ("".equals(resolution) || resolution == null)) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if(CONFIRMED_NAME.equals(state) && I_ENHANCEMENT.equals(issueType)) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if(WORKING_NAME.equals(state) && I_BUG.equals(issueType) && !confirmed) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if(VERIFYING_NAME.equals(state) && !Command.R_FIXED.equals(resolution)) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if(I_ENHANCEMENT.equals(issueType) && confirmed) {
+			throw new IllegalArgumentException("Invalid issue.");
 		}
 		
 		setIssueId(id);
