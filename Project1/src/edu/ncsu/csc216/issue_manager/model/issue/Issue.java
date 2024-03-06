@@ -480,9 +480,19 @@ public class Issue {
 			throw new IllegalArgumentException("Invalid issue.");
 		}
 		
-		if((NEW_NAME.equals(state) || CONFIRMED_NAME.equals(state)) && (!"".equals(owner) || owner != null)) {
+		
+		if(NEW_NAME.equals(state) && owner != null && (!owner.isBlank() || !owner.isEmpty())) {
 			throw new IllegalArgumentException("Invalid issue.");
 		}
+		
+		if(CONFIRMED_NAME.equals(state) && owner != null && (!owner.isBlank() || !owner.isEmpty())) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
+		if(CONFIRMED_NAME.equals(state) && !confirmed) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+	
 		
 		if((VERIFYING_NAME.equals(state) || CLOSED_NAME.equals(state)) && ("".equals(resolution) || resolution == null)) {
 			throw new IllegalArgumentException("Invalid issue.");
@@ -503,6 +513,7 @@ public class Issue {
 		if(I_ENHANCEMENT.equals(issueType) && confirmed) {
 			throw new IllegalArgumentException("Invalid issue.");
 		}
+		
 		
 		setIssueId(id);
 		setState(state);

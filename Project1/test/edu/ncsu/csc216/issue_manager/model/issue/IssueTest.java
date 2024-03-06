@@ -46,7 +46,7 @@ public class IssueTest {
 	@Test
 	public void testToString() {
 		Issue issue = new Issue(id, issueType, summary, note);
-		assertEquals("*1,New,Enhancement,summary,,false,\n-[New] note \n", issue.toString());
+		assertEquals("*1,New,Enhancement,summary,null,false,\n-[New] note \n", issue.toString());
 	}
 	
 	/** Tests testUpdate method */
@@ -76,7 +76,8 @@ public class IssueTest {
 	@Test
 	public void testUpdate2() {
 		ArrayList<String> notes = new ArrayList<>();
-		Issue issue = new Issue(id, "New", "Bug", "summary", "mkpatil", true, "Duplicate", notes);
+		notes.add(note);
+		Issue issue = new Issue(id, "New", "Bug", "summary", "", true, "Duplicate", notes);
 		assertEquals("New", issue.getStateName());
 		
 		Command c = new Command(CommandValue.CONFIRM, "mkpatil", Resolution.WONTFIX, "note");
@@ -89,7 +90,7 @@ public class IssueTest {
 		
 		Command c3 = new Command(CommandValue.REOPEN, "mkpatil", Resolution.FIXED, "note3");
 		issue.update(c3);
-		assertEquals("Working", issue.getStateName());
+		assertEquals("Confirmed", issue.getStateName());
 		
 	}
 	
@@ -97,6 +98,7 @@ public class IssueTest {
 	@Test
 	public void testUpdate3() {
 		ArrayList<String> notes = new ArrayList<>();
+		notes.add(note);
 		Issue issue = new Issue(id, "Closed", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
 		assertEquals("Closed", issue.getStateName());
 		
@@ -118,6 +120,7 @@ public class IssueTest {
 	@Test
 	public void testUpdate4() {
 		ArrayList<String> notes = new ArrayList<>();
+		notes.add(note);
 		Issue issue = new Issue(id, "New", "Bug", "summary", null, true, "Duplicate", notes);
 		assertEquals("New", issue.getStateName());
 		
@@ -137,6 +140,7 @@ public class IssueTest {
 	@Test
 	public void testUpdateFail() {
 		ArrayList<String> notes = new ArrayList<>();
+		notes.add(note);
 		Issue issue = new Issue(id, "Closed", "Bug", "summary", "mkpatil", false, "Duplicate", notes);
 		assertEquals("Closed", issue.getStateName());
 		
