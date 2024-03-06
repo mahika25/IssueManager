@@ -46,7 +46,7 @@ public class IssueTest {
 	@Test
 	public void testToString() {
 		Issue issue = new Issue(id, issueType, summary, note);
-		assertEquals("*1,New,Enhancement,summary,null,false,\n-[New] note \n", issue.toString());
+		assertEquals("*1,New,Enhancement,summary,null,false,\n-[New] note\n", issue.toString());
 	}
 	
 	/** Tests testUpdate method */

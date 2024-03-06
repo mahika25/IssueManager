@@ -30,7 +30,7 @@ public class IssueWriterTest {
 		notes1.add("[New] Note 1");
 		notes1.add("[Confirmed] Note 2");
 		notes1.add("[Working] Note 3");
-		issues.add(new Issue(3, "Working", "Bug", "Issue description", "", true, "", notes1));
+		issues.add(new Issue(3, "Working", "Bug", "Issue description", "x", true, "", notes1));
 		
 		
 		try {
@@ -39,7 +39,7 @@ public class IssueWriterTest {
 			fail("Cannot write to issues to file");
 		}
 		
-		checkFiles("test-files/issue10.txt", "test-files/writeRecords.txt");
+		checkFiles("test-files/issue10valid.txt", "test-files/writeRecords.txt");
 	}
 	
 		
