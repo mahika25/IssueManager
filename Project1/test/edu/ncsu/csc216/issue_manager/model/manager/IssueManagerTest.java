@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
 import edu.ncsu.csc216.issue_manager.model.io.IssueReader;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
@@ -71,7 +74,17 @@ public class IssueManagerTest {
 	/**Tests loadIssuesFromFile method */
 	@Test
 	public void testLoadIssuesFromFile() {
-		fail();
+		manager.createNewIssueList();
+		manager.loadIssuesFromFile("test-files/issue1.txt");
+		
+		Object[][] issues = manager.getIssueListAsArray();
+		assertEquals(5, issues.length);
+		assertEquals(1, issues[0][0]);
+        assertEquals("New", issues[0][1]);
+        assertEquals("Enhancement", issues[0][2]);
+        assertEquals("Issue description", issues[0][3]);
+   
+	
 	}
 	
 	/**Tests createNewIssueList method */
@@ -135,7 +148,13 @@ public class IssueManagerTest {
 	/**Tests executeCommand method */
 	@Test
 	public void testExecuteCommand() {
-		fail();
+		manager.createNewIssueList();
+		manager.addIssueToList(IssueType.BUG, "summary", "note");
+		Command command = new Command(CommandValue.CONFIRM, "mkpatil", Resolution.FIXED, "note");
+		manager.executeCommand(1, command);
+		
+		Issue curIssue = manager.getIssueById(1);
+	    assertEquals(Issue.CONFIRMED_NAME, curIssue.getStateName());
 	}
 	
 	/**Tests deleteissueById method */

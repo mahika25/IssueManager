@@ -121,7 +121,7 @@ public class IssueTest {
 	public void testUpdate4() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add(note);
-		Issue issue = new Issue(id, "New", "Bug", "summary", null, true, "Duplicate", notes);
+		Issue issue = new Issue(id, "New", "Bug", "summary", "", true, "Duplicate", notes);
 		assertEquals("New", issue.getStateName());
 		
 		Command c = new Command(CommandValue.RESOLVE, null, Resolution.DUPLICATE, "note");

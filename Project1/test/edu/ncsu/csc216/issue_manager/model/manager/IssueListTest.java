@@ -67,6 +67,7 @@ public class IssueListTest {
         assertEquals(1, list.getIssuesByType("Enhancement").size());
 	}
 	
+	
 	/** Tests the getIssueById method */
 	@Test
 	public void testGetIssueById(){
@@ -82,14 +83,15 @@ public class IssueListTest {
         assertEquals(0, list.getIssues().size());
         
       
-        int id = list.addIssue(IssueType.BUG, "Bug summary", "Bug note");
-        Command command = new Command(CommandValue.ASSIGN, "Owner", Resolution.DUPLICATE, "Note");
+        int id = list.addIssue(IssueType.BUG, "summary", "note");
+        Command command = new Command(CommandValue.CONFIRM, "mkpatil", Resolution.FIXED, "note");
         list.executeCommand(id, command);
-        assertEquals("Owner", list.getIssueById(id).getOwner());
         
-        command = new Command(CommandValue.CONFIRM, "", Resolution.FIXED, "Confirming the issue");
-        list.executeCommand(id, command);
-        assertTrue(list.getIssueById(id).isConfirmed());
+        
+        Issue curIssue = list.getIssueById(id);
+        assertEquals(Issue.CONFIRMED_NAME, curIssue.getStateName());
+ 
+ 
 	}
 	
 	/** Tests the deleteIssueById method */
