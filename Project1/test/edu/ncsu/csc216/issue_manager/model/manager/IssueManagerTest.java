@@ -33,6 +33,7 @@ public class IssueManagerTest {
 	/**Tests saveIssuesToFile method */
 	@Test
 	public void testSaveIssuesToFile() {
+		System.err.print("Hello Jenkins");
 		manager.createNewIssueList();
 		ArrayList<String> notes1 = new ArrayList<>();
 		notes1.add("[New] Note 1");
