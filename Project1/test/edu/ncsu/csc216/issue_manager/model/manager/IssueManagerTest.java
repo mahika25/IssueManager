@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -33,7 +34,6 @@ public class IssueManagerTest {
 	/**Tests saveIssuesToFile method */
 	@Test
 	public void testSaveIssuesToFile() {
-		System.err.print("Hello Jenkins");
 		manager.createNewIssueList();
 		ArrayList<String> notes1 = new ArrayList<>();
 		notes1.add("[New] Note 1");
@@ -69,7 +69,7 @@ public class IssueManagerTest {
 			expScanner.close();
 			actScanner.close();
 		} catch (IOException e) {
-			fail("Error reading files.");
+			fail("Error reading files." + e.getMessage());
 		}
 	}
 	
@@ -188,6 +188,27 @@ public class IssueManagerTest {
 	    assertEquals("Issue description", issueArray[1][3].toString());
 	}
 	
+	/**Tests deleteissueById method */
+	@Test
+	public void testAddIssueToList() {
+		manager.createNewIssueList();
+	    manager.addIssueToList(IssueType.BUG, "summary1", "note1");
+	    manager.addIssueToList(IssueType.ENHANCEMENT, "summary2", "note2");
+	    manager.addIssueToList(IssueType.BUG, "summary3", "note3");
+	    Object[][] issueArray = manager.getIssueListAsArrayByIssueType("Bug");
+	    
+	    assertEquals(2, issueArray.length);
+	    
+	    assertEquals("1", issueArray[0][0].toString());
+	    assertEquals("New", issueArray[0][1].toString());
+	    assertEquals("Bug", issueArray[0][2].toString());
+	    assertEquals("summary1", issueArray[0][3].toString());
+	    
+	    assertEquals("3", issueArray[1][0].toString());
+	    assertEquals("New", issueArray[1][1].toString());
+	    assertEquals("Bug", issueArray[1][2].toString());
+	    assertEquals("summary3", issueArray[1][3].toString());
+	}
 
 	
 
