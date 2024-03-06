@@ -48,7 +48,7 @@ public class IssueManagerTest {
 			fail("Cannot write to issues to file");
 		}
 		
-		checkFiles("test-files/IssueManagerTest.txt", "test-files/writeRecords.txt");
+		checkFiles("test-files/issueManagerTest.txt", "test-files/writeRecords.txt");
 		
 	}
 	
