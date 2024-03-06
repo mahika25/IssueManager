@@ -521,6 +521,10 @@ public class Issue {
 			throw new IllegalArgumentException("Invalid issue.");
 		}
 		
+		if(I_ENHANCEMENT.equals(issueType) && Command.R_WORKSFORME.equals(resolution)) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
 		
 		setIssueId(id);
 		setState(state);
