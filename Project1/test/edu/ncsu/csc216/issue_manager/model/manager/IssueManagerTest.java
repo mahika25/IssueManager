@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -12,8 +11,6 @@ import org.junit.Test;
 import edu.ncsu.csc216.issue_manager.model.command.Command;
 import edu.ncsu.csc216.issue_manager.model.command.Command.CommandValue;
 import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
-import edu.ncsu.csc216.issue_manager.model.io.IssueReader;
-import edu.ncsu.csc216.issue_manager.model.io.IssueWriter;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 
