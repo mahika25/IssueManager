@@ -161,8 +161,10 @@ public class IssueTest {
 		Issue issue = new Issue(id, "Verifying", "Enhancement", "summary", "mkpatil", false, "Fixed", notes);
 		assertEquals("Verifying", issue.getStateName());
 		
-		Command c6 = new Command(CommandValue.REOPEN, "mk", Resolution.DUPLICATE, null);
-		//assertThrows(IllegalArgumentException.class, () -> issue.update(c6));
+		Command c6 = new Command(CommandValue.REOPEN, "mk", Resolution.DUPLICATE, "note");
+		issue.update(c6);
+		assertEquals("Working", issue.getStateName());
+	
 		
 		
 
