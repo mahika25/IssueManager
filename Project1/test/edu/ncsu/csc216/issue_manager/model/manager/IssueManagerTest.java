@@ -49,6 +49,7 @@ public class IssueManagerTest {
 		}
 		
 		checkFiles("test-files/IssueManagerTest.txt", "test-files/writeRecords.txt");
+		
 	}
 	
 	/**
