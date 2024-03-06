@@ -501,6 +501,10 @@ public class Issue {
 			throw new IllegalArgumentException("Invalid issue.");
 		}
 		
+		if(CONFIRMED_NAME.equals(state) && resolution != null && (!resolution.isBlank() || !resolution.isEmpty())) {
+			throw new IllegalArgumentException("Invalid issue.");
+		}
+		
 		if(CONFIRMED_NAME.equals(state) && I_ENHANCEMENT.equals(issueType)) {
 			throw new IllegalArgumentException("Invalid issue.");
 		}
@@ -638,6 +642,7 @@ public class Issue {
 		if(resolution.equals(Command.R_WORKSFORME)) {
 			this.resolution = Resolution.WORKSFORME;
 		}
+		
 		
 
 	}
