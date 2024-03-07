@@ -15,7 +15,13 @@ import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
 public class Issue {
 	
 	/** Enum that shows the possible types of issues */
-	public enum IssueType { ENHANCEMENT, BUG };
+	public enum IssueType { 
+		
+		/**Issue type of enhancement*/
+		ENHANCEMENT, 
+		
+		/**Issue type of bug*/
+		BUG };
 	
 	/**
 	 * Interface for states in the Issue State Pattern.  All 
